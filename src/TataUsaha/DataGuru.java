@@ -33,12 +33,39 @@ public class DataGuru extends javax.swing.JFrame {
     /**
      * Creates new form DataGuru
      */
-    private int userId;
+    private HomeTataUsaha homeFrame;
     public String nip;
+    private String gen;
 
-    public DataGuru(HomeTataUsaha homeFrame, String nip, int userId) {
+    public DataGuru(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
+        this.homeFrame = homeFrame;
+        this.userName = userName;
+        this.userId = userId;
+        user.setText(userName);
         loadDataGuru();
+    }
+
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    //    BARU 1
+    private int userId;
+    private String userName;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -250,10 +277,9 @@ public class DataGuru extends javax.swing.JFrame {
     }
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        HomeTataUsaha HomeTataUsahaFrame = new HomeTataUsaha();
-        HomeTataUsahaFrame.setVisible(true);
-        HomeTataUsahaFrame.pack();
-        HomeTataUsahaFrame.setLocationRelativeTo(null);
+        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
+        homeFrame.setVisible(true);
+        homeFrame.loadJadwalData(hariDiPilih);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -312,7 +338,7 @@ public class DataGuru extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         DataGuruTable.setModel(model);
 
         TableActionEvent event = new TableActionEvent() {
@@ -399,7 +425,10 @@ public class DataGuru extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new DataGuru().setVisible(true);
+                HomeTataUsaha homeFrame = new HomeTataUsaha();
+                String userName = "NamaPenggunaTest";
+                int userId = 1;
+                new DataGuru(homeFrame, userName, userId).setVisible(true);
             }
         });
     }

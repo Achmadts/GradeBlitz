@@ -424,27 +424,25 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDataTahunAjaranMousePressed
 
     private void DataSiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataSiswaActionPerformed
+
+    }//GEN-LAST:event_DataSiswaActionPerformed
+
+    private void DataSiswaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataSiswaMousePressed
         String fname = user.getText();
         DataMurid DataMuridFrame = new DataMurid(this, fname, userId);
         DataMuridFrame.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_DataSiswaActionPerformed
-
-    private void DataSiswaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataSiswaMousePressed
-
     }//GEN-LAST:event_DataSiswaMousePressed
 
     private void InputDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputDataGuruActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
     }//GEN-LAST:event_InputDataGuruActionPerformed
 
     private void DataGuruMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataGuruMousePressed
         String fname = user.getText();
         DataGuru DataGuruFrame = new DataGuru(this, fname, userId);
         DataGuruFrame.setVisible(true);
-        DataGuruFrame.pack();
-        DataGuruFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_DataGuruMousePressed
 
     private void DataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataGuruActionPerformed
