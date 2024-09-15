@@ -281,10 +281,9 @@ public class DataMurid extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        HomeTataUsaha HomeTataUsahaFrame = new HomeTataUsaha();
-        HomeTataUsahaFrame.setVisible(true);
-        HomeTataUsahaFrame.pack();
-        HomeTataUsahaFrame.setLocationRelativeTo(null);
+        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
+        homeFrame.setVisible(true);
+        homeFrame.loadJadwalData(hariDiPilih);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 

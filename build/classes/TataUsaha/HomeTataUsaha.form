@@ -48,20 +48,20 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="InputDataKelasMousePressed"/>
               </Events>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu1">
+            <Menu class="javax.swing.JMenu" name="inputDataMapel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Input Data Mapel"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu1MousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="inputDataMapelMousePressed"/>
               </Events>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu2">
+            <Menu class="javax.swing.JMenu" name="inputDataTahunAjaran">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Input Data Tahun Ajaran"/>
               </Properties>
               <Events>
-                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu2MousePressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="inputDataTahunAjaranMousePressed"/>
               </Events>
             </Menu>
           </SubComponents>
@@ -77,6 +77,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DataGuruMousePressed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataGuruActionPerformed"/>
               </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="DataSiswa">
@@ -92,16 +93,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data Kelas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataKelasActionPerformed"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="DataMapel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data Mata Pelajaran"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataMapelActionPerformed"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="DataTA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data Tahun Ajaran"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataTAActionPerformed"/>
+              </Events>
             </Menu>
           </SubComponents>
         </Menu>

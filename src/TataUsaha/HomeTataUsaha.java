@@ -42,6 +42,16 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         loadJadwalData(hariDiPilih);
     }
 
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public void setUser(String name) {
         user.setText(name);
     }
@@ -74,8 +84,8 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         InputDataGuru = new javax.swing.JMenu();
         InputDataJadwal = new javax.swing.JMenu();
         InputDataKelas = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        inputDataMapel = new javax.swing.JMenu();
+        inputDataTahunAjaran = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         DataGuru = new javax.swing.JMenu();
         DataSiswa = new javax.swing.JMenu();
@@ -214,21 +224,21 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         });
         input.add(InputDataKelas);
 
-        jMenu1.setText("Input Data Mapel");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        inputDataMapel.setText("Input Data Mapel");
+        inputDataMapel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu1MousePressed(evt);
+                inputDataMapelMousePressed(evt);
             }
         });
-        input.add(jMenu1);
+        input.add(inputDataMapel);
 
-        jMenu2.setText("Input Data Tahun Ajaran");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        inputDataTahunAjaran.setText("Input Data Tahun Ajaran");
+        inputDataTahunAjaran.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu2MousePressed(evt);
+                inputDataTahunAjaranMousePressed(evt);
             }
         });
-        input.add(jMenu2);
+        input.add(inputDataTahunAjaran);
 
         jMenuBar2.add(input);
 
@@ -238,6 +248,11 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         DataGuru.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 DataGuruMousePressed(evt);
+            }
+        });
+        DataGuru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataGuruActionPerformed(evt);
             }
         });
         jMenu3.add(DataGuru);
@@ -256,12 +271,27 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         jMenu3.add(DataSiswa);
 
         DataKelas.setText("Data Kelas");
+        DataKelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataKelasActionPerformed(evt);
+            }
+        });
         jMenu3.add(DataKelas);
 
         DataMapel.setText("Data Mata Pelajaran");
+        DataMapel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataMapelActionPerformed(evt);
+            }
+        });
         jMenu3.add(DataMapel);
 
         DataTA.setText("Data Tahun Ajaran");
+        DataTA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataTAActionPerformed(evt);
+            }
+        });
         jMenu3.add(DataTA);
 
         jMenuBar2.add(jMenu3);
@@ -348,27 +378,24 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     }//GEN-LAST:event_inputMousePressed
 
     private void InputDataSiswaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputDataSiswaMousePressed
-        InputDataSiswa InputDataSiswaFrame = new InputDataSiswa();
+        String fname = user.getText();
+        InputDataSiswa InputDataSiswaFrame = new InputDataSiswa(this, fname, userId);
         InputDataSiswaFrame.setVisible(true);
-        InputDataSiswaFrame.pack();
-        InputDataSiswaFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_InputDataSiswaMousePressed
 
     private void InputDataGuruMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputDataGuruMousePressed
-        InputDataGuru InputDataGuruFrame = new InputDataGuru();
+        String fname = user.getText();
+        InputDataGuru InputDataGuruFrame = new InputDataGuru(this, fname, userId);
         InputDataGuruFrame.setVisible(true);
-        InputDataGuruFrame.pack();
-        InputDataGuruFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_InputDataGuruMousePressed
 
     private void InputDataJadwalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputDataJadwalMousePressed
-        InputDataJadwal InputDataJadwalFrame = new InputDataJadwal();
+        String fname = user.getText();
+        InputDataJadwal InputDataJadwalFrame = new InputDataJadwal(this, fname, userId);
         InputDataJadwalFrame.setVisible(true);
-        InputDataJadwalFrame.pack();
-        InputDataJadwalFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_InputDataJadwalMousePressed
 
     private void InputDataJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InputDataJadwalKeyPressed
@@ -376,45 +403,35 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     }//GEN-LAST:event_InputDataJadwalKeyPressed
 
     private void InputDataKelasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputDataKelasMousePressed
-        InputDataKelas InputDataKelasFrame = new InputDataKelas();
+        String fname = user.getText();
+        InputDataKelas InputDataKelasFrame = new InputDataKelas(this, fname, userId);
         InputDataKelasFrame.setVisible(true);
-        InputDataKelasFrame.pack();
-        InputDataKelasFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_InputDataKelasMousePressed
 
-    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
-        InputDataMapel InputDataMapelFrame = new InputDataMapel();
+    private void inputDataMapelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataMapelMousePressed
+        String fname = user.getText();
+        InputDataMapel InputDataMapelFrame = new InputDataMapel(this, fname, userId);
         InputDataMapelFrame.setVisible(true);
-        InputDataMapelFrame.pack();
-        InputDataMapelFrame.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jMenu1MousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_inputDataMapelMousePressed
 
-    private void jMenu2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MousePressed
-        InputTahunAjaran InputTahunAjaranFrame = new InputTahunAjaran();
+    private void inputDataTahunAjaranMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataTahunAjaranMousePressed
+        String fname = user.getText();
+        InputTahunAjaran InputTahunAjaranFrame = new InputTahunAjaran(this, fname, userId);
         InputTahunAjaranFrame.setVisible(true);
-        InputTahunAjaranFrame.pack();
-        InputTahunAjaranFrame.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_jMenu2MousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_inputDataTahunAjaranMousePressed
 
     private void DataSiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataSiswaActionPerformed
         String fname = user.getText();
         DataMurid DataMuridFrame = new DataMurid(this, fname, userId);
         DataMuridFrame.setVisible(true);
-        DataMuridFrame.pack();
-        DataMuridFrame.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_DataSiswaActionPerformed
 
     private void DataSiswaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataSiswaMousePressed
-        String fname = user.getText();
-        DataMurid DataMuridFrame = new DataMurid(this, fname, userId);
-        DataMuridFrame.setVisible(true);
-        DataMuridFrame.pack();
-        DataMuridFrame.setLocationRelativeTo(null);
-        this.dispose();
+
     }//GEN-LAST:event_DataSiswaMousePressed
 
     private void InputDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputDataGuruActionPerformed
@@ -429,6 +446,22 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         DataGuruFrame.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_DataGuruMousePressed
+
+    private void DataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataGuruActionPerformed
+
+    }//GEN-LAST:event_DataGuruActionPerformed
+
+    private void DataKelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataKelasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DataKelasActionPerformed
+
+    private void DataMapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataMapelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DataMapelActionPerformed
+
+    private void DataTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataTAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DataTAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -478,8 +511,8 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JComboBox<String> comboBoxHari;
     private javax.swing.JMenu input;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu inputDataMapel;
+    private javax.swing.JMenu inputDataTahunAjaran;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
