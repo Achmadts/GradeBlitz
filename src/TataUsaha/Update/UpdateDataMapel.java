@@ -13,7 +13,7 @@ public class UpdateDataMapel extends javax.swing.JFrame {
     /**
      * Creates new form UpdateDataMapel
      */
-    public UpdateDataMapel() {
+    public UpdateDataMapel(int idMapel, int userId, String namaMapel) {
         initComponents();
     }
 
@@ -72,7 +72,7 @@ public class UpdateDataMapel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateDataMapel().setVisible(true);
+//                new UpdateDataMapel().setVisible(true);
             }
         });
     }

@@ -13,7 +13,7 @@ public class UpdateDataKelas extends javax.swing.JFrame {
     /**
      * Creates new form UpdateDataKelas
      */
-    public UpdateDataKelas() {
+    public UpdateDataKelas(int idKelas, int userId, String namaKelas, String jurusan, String gen) {
         initComponents();
     }
 
@@ -72,7 +72,7 @@ public class UpdateDataKelas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateDataKelas().setVisible(true);
+//                new UpdateDataKelas().setVisible(true);
             }
         });
     }

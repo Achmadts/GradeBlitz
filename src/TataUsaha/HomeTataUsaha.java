@@ -271,6 +271,20 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         jMenu3.add(DataSiswa);
 
         DataKelas.setText("Data Kelas");
+        DataKelas.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
+                DataKelasMenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
+            }
+        });
+        DataKelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                DataKelasMousePressed(evt);
+            }
+        });
         DataKelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DataKelasActionPerformed(evt);
@@ -279,6 +293,20 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         jMenu3.add(DataKelas);
 
         DataMapel.setText("Data Mata Pelajaran");
+        DataMapel.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
+                DataMapelMenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
+            }
+        });
+        DataMapel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                DataMapelMousePressed(evt);
+            }
+        });
         DataMapel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DataMapelActionPerformed(evt);
@@ -460,6 +488,28 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     private void DataTAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataTAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DataTAActionPerformed
+
+    private void DataKelasMenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_DataKelasMenuKeyPressed
+
+    }//GEN-LAST:event_DataKelasMenuKeyPressed
+
+    private void DataKelasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataKelasMousePressed
+        String fname = user.getText();
+        DataKelas DataKelasFrame = new DataKelas(this, fname, userId);
+        DataKelasFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DataKelasMousePressed
+
+    private void DataMapelMenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_DataMapelMenuKeyPressed
+
+    }//GEN-LAST:event_DataMapelMenuKeyPressed
+
+    private void DataMapelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataMapelMousePressed
+        String fname = user.getText();
+        DataMapel DataMapelFrame = new DataMapel(this, fname, userId);
+        DataMapelFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DataMapelMousePressed
 
     /**
      * @param args the command line arguments

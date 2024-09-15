@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
@@ -26,8 +27,37 @@ public class DataKelas extends javax.swing.JFrame {
     /**
      * Creates new form DataKelas
      */
-    public DataKelas() {
+    private HomeTataUsaha homeFrame;
+
+    public DataKelas(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
+        this.homeFrame = homeFrame;
+        this.userName = userName;
+        this.userId = userId;
+        user.setText(userName);
+        loadDataKelas();
+    }
+
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    //    BARU 1
+    private int userId;
+    private String userName;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -44,7 +74,7 @@ public class DataKelas extends javax.swing.JFrame {
         DataKelasTable = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         user = new java.awt.Label();
-        searchDataSiswa = new javax.swing.JTextField();
+        searchDataKelas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +83,11 @@ public class DataKelas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
+                "ID", "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                true, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -82,18 +112,18 @@ public class DataKelas extends javax.swing.JFrame {
         user.setForeground(new java.awt.Color(204, 51, 255));
         user.setText("Name");
 
-        searchDataSiswa.setText("Cari Nama kelas atau Jurusan");
-        searchDataSiswa.addFocusListener(new java.awt.event.FocusAdapter() {
+        searchDataKelas.setText("Cari Nama kelas atau Jurusan");
+        searchDataKelas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                searchDataSiswaFocusGained(evt);
+                searchDataKelasFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                searchDataSiswaFocusLost(evt);
+                searchDataKelasFocusLost(evt);
             }
         });
-        searchDataSiswa.addKeyListener(new java.awt.event.KeyAdapter() {
+        searchDataKelas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchDataSiswaKeyReleased(evt);
+                searchDataKelasKeyReleased(evt);
             }
         });
 
@@ -108,7 +138,7 @@ public class DataKelas extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(searchDataSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -121,7 +151,7 @@ public class DataKelas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchDataSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
@@ -149,38 +179,119 @@ public class DataKelas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        HomeTataUsaha HomeTataUsahaFrame = new HomeTataUsaha();
-        HomeTataUsahaFrame.setVisible(true);
-        HomeTataUsahaFrame.pack();
-        HomeTataUsahaFrame.setLocationRelativeTo(null);
+        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
+        homeFrame.setVisible(true);
+        homeFrame.loadJadwalData(hariDiPilih);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void searchDataSiswaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataSiswaFocusGained
-        if (searchDataSiswa.getText().equals("Cari Nama kelas atau Jurusan")) {
-            searchDataSiswa.setText("");
-            searchDataSiswa.setForeground(new Color(153, 153, 153));
+    private void searchDataKelasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataKelasFocusGained
+        if (searchDataKelas.getText().equals("Cari Nama kelas atau Jurusan")) {
+            searchDataKelas.setText("");
+            searchDataKelas.setForeground(new Color(153, 153, 153));
         }
-    }//GEN-LAST:event_searchDataSiswaFocusGained
+    }//GEN-LAST:event_searchDataKelasFocusGained
 
-    private void searchDataSiswaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataSiswaFocusLost
-        if (searchDataSiswa.getText().equals("")) {
-            searchDataSiswa.setText("Cari Nama kelas atau Jurusan");
-            searchDataSiswa.setForeground(new Color(153, 153, 153));
+    private void searchDataKelasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataKelasFocusLost
+        if (searchDataKelas.getText().equals("")) {
+            searchDataKelas.setText("Cari Nama kelas atau Jurusan");
+            searchDataKelas.setForeground(new Color(153, 153, 153));
         }
-    }//GEN-LAST:event_searchDataSiswaFocusLost
+    }//GEN-LAST:event_searchDataKelasFocusLost
 
-    private void searchDataSiswaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataSiswaKeyReleased
-        String searchText = searchDataSiswa.getText();
+    public void loadDataKelas() {
+        String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
+                + "FROM kelas k "
+                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id ";
 
-        String query = "SELECT k.id, k.nama_kelas, k.nama_jurusan, ta.gen "
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "ID", "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
+        }, 0);
+
+        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+
+                model.setRowCount(0);
+
+                while (resultSet.next()) {
+                    String id_kelas = resultSet.getString("id");
+                    String namaKelas = resultSet.getString("nama_kelas");
+                    String jurusan = resultSet.getString("jurusan");
+                    String gen = resultSet.getString("gen");
+
+                    model.addRow(new Object[]{id_kelas, namaKelas, jurusan, gen});
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        DataKelasTable.setModel(model);
+
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                if (DataKelasTable.isEditing()) {
+                    DataKelasTable.getCellEditor().stopCellEditing();
+                }
+
+                int idKelas = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String namaKelas = model.getValueAt(row, 1).toString();
+                String jurusan = model.getValueAt(row, 2).toString();
+                String gen = model.getValueAt(row, 3).toString();
+
+                UpdateDataKelas UpdateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
+                UpdateDataKelasForm.setVisible(true);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (DataKelasTable.isEditing()) {
+                    DataKelasTable.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) DataKelasTable.getModel();
+                String id = model.getValueAt(row, 0).toString();
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan id: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM kelas WHERE id = ?";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setString(1, id);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        };
+        DataKelasTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        DataKelasTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+    }
+
+    private void searchDataKelasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataKelasKeyReleased
+        String searchText = searchDataKelas.getText();
+
+        String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
                 + "FROM kelas k "
                 + "JOIN tahun_ajaran ta ON k.gen_id = ta.id "
-                + "WHERE (m.nis LIKE ? OR m.nama LIKE ?)";
+                + "WHERE (k.nama_kelas LIKE ? OR k.jurusan LIKE ?)";
 
         // Buat model tabel
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
+            "ID", "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
         }, 0);
 
         try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -209,57 +320,56 @@ public class DataKelas extends javax.swing.JFrame {
 
         DataKelasTable.setModel(model);
 
-//        TableActionEvent event = new TableActionEvent() {
-//            @Override
-//            public void onEdit(int row) {
-//                if (DataKelasTable.isEditing()) {
-//                    DataKelasTable.getCellEditor().stopCellEditing();
-//                }
-//
-////                String id_kelas = model.getValueAt(row, 0).toString();
-//                String namaKelas = model.getValueAt(row, 1).toString();
-//                String jurusan = model.getValueAt(row, 2).toString();
-//                String gen = model.getValueAt(row, 3).toString();
-//
-//                UpdateDataKelas UpdateDataKelasForm = new UpdateDataKelas(userId, userName);
-//                UpdateDataKelasForm.setVisible(true);
-//            }
-//
-//            @Override
-//            public void onDelete(int row) {
-//                if (DataKelasTable.isEditing()) {
-//                    DataKelasTable.getCellEditor().stopCellEditing();
-//                }
-//
-//                DefaultTableModel model = (DefaultTableModel) DataKelasTable.getModel();
-//                String nis = model.getValueAt(row, 0).toString();
-//
-//                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nis + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-//
-//                if (confirm == JOptionPane.YES_OPTION) {
-//                    String query = "DELETE FROM murid WHERE nis = ?";
-//
-//                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-//                        preparedStatement.setString(1, nis);
-//                        int affectedRows = preparedStatement.executeUpdate();
-//
-//                        if (affectedRows > 0) {
-//                            model.removeRow(row);
-//                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-//                        }
-//                    } catch (SQLException e) {
-//                        e.printStackTrace();
-//                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-//                    }
-//                }
-//            }
-//        };
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                if (DataKelasTable.isEditing()) {
+                    DataKelasTable.getCellEditor().stopCellEditing();
+                }
 
-        DataKelasTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
-//        DataKelasTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
-    }//GEN-LAST:event_searchDataSiswaKeyReleased
+                int idKelas = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String namaKelas = model.getValueAt(row, 1).toString();
+                String jurusan = model.getValueAt(row, 2).toString();
+                String gen = model.getValueAt(row, 3).toString();
+
+                UpdateDataKelas UpdateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
+                UpdateDataKelasForm.setVisible(true);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (DataKelasTable.isEditing()) {
+                    DataKelasTable.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) DataKelasTable.getModel();
+                String id = model.getValueAt(row, 0).toString();
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan id: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM kelas WHERE id = ?";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setString(1, id);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        };
+        DataKelasTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        DataKelasTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+    }//GEN-LAST:event_searchDataKelasKeyReleased
 
     /**
      * @param args the command line arguments
@@ -291,7 +401,10 @@ public class DataKelas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DataKelas().setVisible(true);
+                HomeTataUsaha homeFrame = new HomeTataUsaha();
+                String userName = "NamaPenggunaTest";
+                int userId = 1;
+                new DataKelas(homeFrame, userName, userId).setVisible(true);
             }
         });
     }
@@ -301,7 +414,7 @@ public class DataKelas extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField searchDataSiswa;
+    private javax.swing.JTextField searchDataKelas;
     private java.awt.Label user;
     // End of variables declaration//GEN-END:variables
 }

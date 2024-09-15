@@ -4,6 +4,21 @@
  */
 package TataUsaha;
 
+import TataUsaha.Update.UpdateDataMapel;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import koneksi.koneksi;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import pelaporan.cell.TableActionCellEditor;
+import pelaporan.cell.TableActionCellRender;
+import pelaporan.cell.TableActionEvent;
+
 /**
  *
  * @author Achmad
@@ -13,8 +28,37 @@ public class DataMapel extends javax.swing.JFrame {
     /**
      * Creates new form DataMapel
      */
-    public DataMapel() {
+    private HomeTataUsaha homeFrame;
+
+    public DataMapel(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
+        this.homeFrame = homeFrame;
+        this.userName = userName;
+        this.userId = userId;
+        user.setText(userName);
+        loadDataMapel();
+    }
+
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    //    BARU 1
+    private int userId;
+    private String userName;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -26,21 +70,291 @@ public class DataMapel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DataMapelTable = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        user = new java.awt.Label();
+        searchDataMapel = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        DataMapelTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "NAMA MAPEL", "ACTION"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        DataMapelTable.setRowHeight(40);
+        DataMapelTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        jScrollPane1.setViewportView(DataMapelTable);
+
+        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        user.setAlignment(java.awt.Label.RIGHT);
+        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setText("Name");
+
+        searchDataMapel.setText("Cari Nama mata pelajaran");
+        searchDataMapel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchDataMapelFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchDataMapelFocusLost(evt);
+            }
+        });
+        searchDataMapel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchDataMapelKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(searchDataMapel, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchDataMapel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
+        homeFrame.setVisible(true);
+        homeFrame.loadJadwalData(hariDiPilih);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void searchDataMapelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataMapelFocusGained
+        if (searchDataMapel.getText().equals("Cari Nama mata pelajaran")) {
+            searchDataMapel.setText("");
+            searchDataMapel.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_searchDataMapelFocusGained
+
+    private void searchDataMapelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchDataMapelFocusLost
+        if (searchDataMapel.getText().equals("")) {
+            searchDataMapel.setText("Cari Nama mata pelajaran");
+            searchDataMapel.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_searchDataMapelFocusLost
+
+    public void loadDataMapel() {
+        String query = "SELECT * FROM mapel ";
+
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "ID", "NAMA MAPEL", "ACTION"
+        }, 0);
+
+        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                while (resultSet.next()) {
+                    String id_mapel = resultSet.getString("id");
+                    String namaMapel = resultSet.getString("nama_mapel");
+
+                    model.addRow(new Object[]{id_mapel, namaMapel});
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        DataMapelTable.setModel(model);
+
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                if (DataMapelTable.isEditing()) {
+                    DataMapelTable.getCellEditor().stopCellEditing();
+                }
+
+                int idMapel = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String namaMapel = model.getValueAt(row, 1).toString();
+
+                UpdateDataMapel UpdateDataMapelForm = new UpdateDataMapel(userId, idMapel, namaMapel);
+                UpdateDataMapelForm.setVisible(true);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (DataMapelTable.isEditing()) {
+                    DataMapelTable.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) DataMapelTable.getModel();
+                String id = model.getValueAt(row, 0).toString();
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM mapel WHERE id = ?";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setString(1, id);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        };
+        DataMapelTable.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender());
+        DataMapelTable.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event));
+    }
+
+    private void searchDataMapelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataMapelKeyReleased
+        String searchText = searchDataMapel.getText();
+
+        String query = "SELECT * FROM mapel "
+                + "WHERE nama_mapel LIKE ?";
+
+        // Buat model tabel
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "ID", "NAMA MAPEL", "ACTION"
+        }, 0);
+
+        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, "%" + searchText + "%");
+
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+
+                model.setRowCount(0);
+
+                while (resultSet.next()) {
+                    String id_mapel = resultSet.getString("id");
+                    String namaMapel = resultSet.getString("nama_mapel");
+
+                    model.addRow(new Object[]{id_mapel, namaMapel});
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        DataMapelTable.setModel(model);
+
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                if (DataMapelTable.isEditing()) {
+                    DataMapelTable.getCellEditor().stopCellEditing();
+                }
+
+                int idMapel = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String namaMapel = model.getValueAt(row, 1).toString();
+
+                UpdateDataMapel UpdateDataMapelForm = new UpdateDataMapel(userId, idMapel, namaMapel);
+                UpdateDataMapelForm.setVisible(true);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (DataMapelTable.isEditing()) {
+                    DataMapelTable.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) DataMapelTable.getModel();
+                String id = model.getValueAt(row, 0).toString();
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM mapel WHERE id = ?";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setString(1, id);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        };
+        DataMapelTable.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender());
+        DataMapelTable.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event));
+    }//GEN-LAST:event_searchDataMapelKeyReleased
 
     /**
      * @param args the command line arguments
@@ -72,11 +386,20 @@ public class DataMapel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DataMapel().setVisible(true);
+                HomeTataUsaha homeFrame = new HomeTataUsaha();
+                String userName = "NamaPenggunaTest";
+                int userId = 1;
+                new DataMapel(homeFrame, userName, userId).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DataMapelTable;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField searchDataMapel;
+    private java.awt.Label user;
     // End of variables declaration//GEN-END:variables
 }

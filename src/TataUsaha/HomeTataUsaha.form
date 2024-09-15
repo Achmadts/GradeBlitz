@@ -94,6 +94,8 @@
                 <Property name="text" type="java.lang.String" value="Data Kelas"/>
               </Properties>
               <Events>
+                <EventHandler event="menuKeyPressed" listener="javax.swing.event.MenuKeyListener" parameters="javax.swing.event.MenuKeyEvent" handler="DataKelasMenuKeyPressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DataKelasMousePressed"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataKelasActionPerformed"/>
               </Events>
             </Menu>
@@ -102,6 +104,8 @@
                 <Property name="text" type="java.lang.String" value="Data Mata Pelajaran"/>
               </Properties>
               <Events>
+                <EventHandler event="menuKeyPressed" listener="javax.swing.event.MenuKeyListener" parameters="javax.swing.event.MenuKeyEvent" handler="DataMapelMenuKeyPressed"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DataMapelMousePressed"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataMapelActionPerformed"/>
               </Events>
             </Menu>
