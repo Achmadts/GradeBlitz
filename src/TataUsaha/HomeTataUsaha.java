@@ -315,6 +315,11 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         jMenu3.add(DataMapel);
 
         DataTA.setText("Data Tahun Ajaran");
+        DataTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                DataTAMousePressed(evt);
+            }
+        });
         DataTA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DataTAActionPerformed(evt);
@@ -510,6 +515,13 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         DataMapelFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_DataMapelMousePressed
+
+    private void DataTAMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataTAMousePressed
+        String fname = user.getText();
+        DataTahunAjaran DataTahunAjaranFrame = new DataTahunAjaran(this, fname, userId);
+        DataTahunAjaranFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DataTAMousePressed
 
     /**
      * @param args the command line arguments

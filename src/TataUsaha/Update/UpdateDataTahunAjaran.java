@@ -13,7 +13,7 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
     /**
      * Creates new form UpdateDataTahunAjaran
      */
-    public UpdateDataTahunAjaran() {
+    public UpdateDataTahunAjaran(int idTA, int userId, String tahun_ajaran, int gen) {
         initComponents();
     }
 
@@ -72,7 +72,7 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateDataTahunAjaran().setVisible(true);
+//                new UpdateDataTahunAjaran().setVisible(true);
             }
         });
     }

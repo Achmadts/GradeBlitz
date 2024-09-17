@@ -114,6 +114,7 @@
                 <Property name="text" type="java.lang.String" value="Data Tahun Ajaran"/>
               </Properties>
               <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DataTAMousePressed"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DataTAActionPerformed"/>
               </Events>
             </Menu>
