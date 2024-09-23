@@ -232,9 +232,9 @@ public class DataTahunAjaran extends javax.swing.JFrame {
                     DataTahunAjaranTable.getCellEditor().stopCellEditing();
                 }
 
-                int idTA = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String idTA = model.getValueAt(row, 0).toString();
                 String tahun_ajaran = model.getValueAt(row, 1).toString();
-                int gen = Integer.parseInt(model.getValueAt(row, 2).toString());
+                String gen = model.getValueAt(row, 2).toString();
 
                 UpdateDataTahunAjaran UpdateDataTahunAjaranForm = new UpdateDataTahunAjaran(userId, idTA, tahun_ajaran, gen);
                 UpdateDataTahunAjaranForm.setVisible(true);
@@ -319,9 +319,9 @@ public class DataTahunAjaran extends javax.swing.JFrame {
                     DataTahunAjaranTable.getCellEditor().stopCellEditing();
                 }
 
-                int idTA = Integer.parseInt(model.getValueAt(row, 0).toString());
+                String idTA = model.getValueAt(row, 0).toString();
                 String tahun_ajaran = model.getValueAt(row, 1).toString();
-                int gen = Integer.parseInt(model.getValueAt(row, 2).toString());
+                String gen = model.getValueAt(row, 2).toString();
 
                 UpdateDataTahunAjaran UpdateDataTahunAjaranForm = new UpdateDataTahunAjaran(userId, idTA, tahun_ajaran, gen);
                 UpdateDataTahunAjaranForm.setVisible(true);

@@ -2,18 +2,15 @@ package Guru;
 
 //import gradeblitz.cell.TableActionCellRender;
 import Guru.Input.InputNilaiSiswa;
+import controllers.MuridController;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import koneksi.koneksi;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import pelaporan.cell.TableActionCellEditor;
 import pelaporan.cell.TableActionCellRender;
 import pelaporan.cell.TableActionEvent;
@@ -27,24 +24,20 @@ public class DataSiswa extends javax.swing.JFrame {
     /**
      * Creates new form InputNilai
      */
+    private final MuridController controller;
     private HomeGuru homeFrame;
-    private String gen;
-    private String namaKelas;
 
     public DataSiswa(HomeGuru homeFrame, String userName, int userId) {
         initComponents();
-        this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new MuridController(userId, userName);
         user.setText(userName);
-        this.gen = "";
-        this.namaKelas = "";
+        this.userId = userId;
+        this.userName = userName;
+        this.homeFrame = homeFrame;
     }
 
     public void setFilters(String gen, String namaKelas) {
-        this.gen = gen;
-        this.namaKelas = namaKelas;
-        loadDataSiswa();
+        controller.loadDataSiswa(gen, namaKelas, DataSiswaTable);
     }
 
     private int roleId;
@@ -200,93 +193,6 @@ public class DataSiswa extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public void loadDataSiswa() {
-        String query = "SELECT m.nis, m.nama, k.nama_kelas, ta.gen, m.no_wa, m.alamat "
-                + "FROM murid m "
-                + "JOIN kelas k ON m.kelas_id = k.id "
-                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id "
-                + "WHERE ta.id = ? AND k.nama_kelas = ?";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "NIS", "NAMA", "KELAS", "GEN", "NO WA", "ALAMAT", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-            preparedStatement.setString(1, gen);
-            preparedStatement.setString(2, namaKelas);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String nis = resultSet.getString("nis");
-                    String nama = resultSet.getString("nama");
-                    String namaKelas = resultSet.getString("nama_kelas");
-                    String gen = resultSet.getString("gen");
-                    String no_wa = resultSet.getString("no_wa");
-                    String alamat = resultSet.getString("alamat");
-
-                    model.addRow(new Object[]{nis, nama, namaKelas, gen, no_wa, alamat, null});
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataSiswaTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
-                }
-
-                String nis = model.getValueAt(row, 0).toString();
-
-//            System.out.println("Debug: userId saat onEdit: " + userId);
-                InputNilaiSiswa inputNilaiForm = new InputNilaiSiswa(nis, userId, userName);
-                inputNilaiForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataSiswaTable.getModel();
-                String nis = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nis + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM murid WHERE nis = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, nis);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-
-        DataSiswaTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
-        DataSiswaTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
-    }
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
         homeFrame.setVisible(true);
@@ -435,10 +341,10 @@ public class DataSiswa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HomeGuru homeFrame = new HomeGuru();
-                String userName = "NamaPenggunaTest";
-                int userId = 1;
-                new DataSiswa(homeFrame, userName, userId).setVisible(true);
+//                HomeGuru homeFrame = new HomeGuru();
+//                String userName = "NamaPenggunaTest";
+//                int userId = 1;
+//                new DataSiswa(homeFrame, userName, userId).setVisible(true);
             }
         });
     }

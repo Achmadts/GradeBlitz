@@ -201,7 +201,7 @@ public class UpdateDataGuru extends javax.swing.JFrame {
                                 .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBack)
-                                .addGap(0, 210, Short.MAX_VALUE)))))
+                                .addGap(0, 199, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -272,15 +272,6 @@ public class UpdateDataGuru extends javax.swing.JFrame {
         }
     }
 
-
-    private void nipGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nipGuruFocusGained
-
-    }//GEN-LAST:event_nipGuruFocusGained
-
-    private void nipGuruFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nipGuruFocusLost
-
-    }//GEN-LAST:event_nipGuruFocusLost
-
     private void namaGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaGuruFocusGained
 
     }//GEN-LAST:event_namaGuruFocusGained
@@ -317,13 +308,21 @@ public class UpdateDataGuru extends javax.swing.JFrame {
         this.dispose();
      }//GEN-LAST:event_btnBackActionPerformed
 
-    private void nipGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipGuruActionPerformed
-//        
-    }//GEN-LAST:event_nipGuruActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         nipGuru.setEditable(false);
     }//GEN-LAST:event_formComponentShown
+
+    private void nipGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipGuruActionPerformed
+        //
+    }//GEN-LAST:event_nipGuruActionPerformed
+
+    private void nipGuruFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nipGuruFocusLost
+
+    }//GEN-LAST:event_nipGuruFocusLost
+
+    private void nipGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nipGuruFocusGained
+
+    }//GEN-LAST:event_nipGuruFocusGained
 
     /**
      * @param args the command line arguments

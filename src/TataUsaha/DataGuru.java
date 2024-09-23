@@ -35,7 +35,7 @@ public class DataGuru extends javax.swing.JFrame {
      */
     private HomeTataUsaha homeFrame;
     public String nip;
-    private String gen;
+//    private String gen;
 
     public DataGuru(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();

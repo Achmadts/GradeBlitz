@@ -20,6 +20,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     private int userId;
+    private String username;
 
     public int getUserId() {
         return userId;
@@ -27,6 +28,14 @@ public class Login extends javax.swing.JFrame {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     /**
@@ -227,6 +236,10 @@ public class Login extends javax.swing.JFrame {
                     notFound = 1;
 
                     if (Password.equals(passDb)) {
+                        // Set nilai loggedInUserId dan loggedInUsername
+                        userId = userIdFromDb;
+                        username = fname;
+
                         if (role == 1) {
                             HomeTataUsaha HomeFrame = new HomeTataUsaha();
                             HomeFrame.setUserId(userIdFromDb);
@@ -236,12 +249,8 @@ public class Login extends javax.swing.JFrame {
                             HomeFrame.setLocationRelativeTo(null);
                             this.dispose();
                         } else if (role == 2) {
-                            HomeGuru HomeFrame = new HomeGuru();
-                            HomeFrame.setUserId(userIdFromDb);
-                            HomeFrame.setUser(fname);
-                            HomeFrame.setVisible(true);
-                            HomeFrame.pack();
-                            HomeFrame.setLocationRelativeTo(null);
+                            HomeGuru homeGuru = new HomeGuru(userId, username);
+                            homeGuru.setVisible(true);
                             this.dispose();
                         }
                         return;
@@ -253,9 +262,8 @@ public class Login extends javax.swing.JFrame {
                 }
 
                 if (notFound == 0) {
-                    JOptionPane.showMessageDialog(new JFrame(), "Email tida ada!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(new JFrame(), "Email tidak ada!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-//                password.setText("");
             }
 
         } catch (Exception e) {

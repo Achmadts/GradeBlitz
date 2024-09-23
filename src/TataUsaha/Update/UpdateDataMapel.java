@@ -4,17 +4,32 @@
  */
 package TataUsaha.Update;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import koneksi.koneksi;
+
 /**
  *
  * @author Achmad
  */
 public class UpdateDataMapel extends javax.swing.JFrame {
 
+    private String namaMapel, idMapel;
+    private int userId;
+
     /**
      * Creates new form UpdateDataMapel
      */
-    public UpdateDataMapel(int idMapel, int userId, String namaMapel) {
+    public UpdateDataMapel(int userId, String idMapel, String namaMapel) {
+        this.idMapel = idMapel;
+        this.namaMapel = namaMapel;
+        this.userId = userId;
         initComponents();
+
+        mapelID.setText(idMapel);
+        mpelName.setText(namaMapel);
     }
 
     /**
@@ -26,21 +41,190 @@ public class UpdateDataMapel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        mapelID = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        mpelName = new javax.swing.JTextField();
+        btnKirimDataGuru = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("UPDATE DATA GURU");
+
+        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("ID MAPEL");
+
+        mapelID.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        mapelID.setForeground(new java.awt.Color(153, 153, 153));
+        mapelID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                mapelIDFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                mapelIDFocusLost(evt);
+            }
+        });
+        mapelID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapelIDActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("MAPEL");
+
+        mpelName.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        mpelName.setForeground(new java.awt.Color(153, 153, 153));
+        mpelName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                mpelNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                mpelNameFocusLost(evt);
+            }
+        });
+        mpelName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mpelNameActionPerformed(evt);
+            }
+        });
+
+        btnKirimDataGuru.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataGuru.setForeground(new java.awt.Color(255, 255, 255));
+        btnKirimDataGuru.setText("SUBMIT");
+        btnKirimDataGuru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKirimDataGuruActionPerformed(evt);
+            }
+        });
+
+        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(42, 42, 42))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mapelID, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(mpelName, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBack)
+                                .addGap(0, 251, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mapelID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(mpelName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnKirimDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataGuruActionPerformed
+        updateDataMapel();
+    }//GEN-LAST:event_btnKirimDataGuruActionPerformed
+
+    private void mpelNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpelNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mpelNameActionPerformed
+
+    private void mpelNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mpelNameFocusLost
+
+    }//GEN-LAST:event_mpelNameFocusLost
+
+    private void mpelNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mpelNameFocusGained
+
+    }//GEN-LAST:event_mpelNameFocusGained
+
+    private void mapelIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapelIDActionPerformed
+        //
+    }//GEN-LAST:event_mapelIDActionPerformed
+
+    private void mapelIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mapelIDFocusLost
+
+    }//GEN-LAST:event_mapelIDFocusLost
+
+    private void mapelIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mapelIDFocusGained
+
+    }//GEN-LAST:event_mapelIDFocusGained
+
+    private void updateDataMapel() {
+        String query = "UPDATE mapel SET nama_mapel = ? WHERE id = ?";
+
+        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(2, mapelID.getText());
+            preparedStatement.setString(1, mpelName.getText());
+
+            System.out.println(idMapel);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Data mapel berhasil diperbarui. Harap refresh halaman data mapel", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -78,5 +262,13 @@ public class UpdateDataMapel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnKirimDataGuru;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField mapelID;
+    private javax.swing.JTextField mpelName;
     // End of variables declaration//GEN-END:variables
 }
