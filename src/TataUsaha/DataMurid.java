@@ -5,6 +5,8 @@
 package TataUsaha;
 
 import TataUsaha.Update.UpdateDataSiswa;
+import controllers.MuridController;
+import controllers.SiswaController;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,19 +33,22 @@ public class DataMurid extends javax.swing.JFrame {
     /**
      * Creates new form DataSiswa
      */
+    private final MuridController controller;
     private HomeTataUsaha homeFrame;
-    private String gen;
-    private String namaKelas;
 
     public DataMurid(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
-        this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new MuridController(userId, userName);
         user.setText(userName);
-        this.gen = "";
-        this.namaKelas = "";
-        loadDataSiswa();
+        this.userId = userId;
+        this.userName = userName;
+        this.homeFrame = homeFrame;
+
+        controller.loadDataMurid("", "", DataMuridTable);
+    }
+
+    public void setFilters(String gen, String namaKelas) {
+        controller.loadDataMurid(gen, namaKelas, DataMuridTable);
     }
 
     private int roleId;
@@ -68,100 +73,6 @@ public class DataMurid extends javax.swing.JFrame {
         this.userName = userName;
     }
 
-    public void loadDataSiswa() {
-        String query = "SELECT m.nis, m.nama, k.nama_kelas, ta.gen, m.no_wa, m.alamat "
-                + "FROM murid m "
-                + "JOIN kelas k ON m.kelas_id = k.id "
-                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "NIS", "NAMA", "KELAS", "GEN", "NO WA", "ALAMAT", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String nis = resultSet.getString("nis");
-                    String nama = resultSet.getString("nama");
-                    String namaKelas = resultSet.getString("nama_kelas");
-                    String gen = resultSet.getString("gen");
-                    String no_wa = resultSet.getString("no_wa");
-                    String alamat = resultSet.getString("alamat");
-
-                    model.addRow(new Object[]{nis, nama, namaKelas, gen, no_wa, alamat, null});
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataSiswaTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
-                }
-
-                String nis = model.getValueAt(row, 0).toString();
-//            System.out.println("Debug: userId saat onEdit: " + userId);
-
-                UpdateDataSiswa UpdateDataSiswaForm = new UpdateDataSiswa(nis, userId, userName);
-                UpdateDataSiswaForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataSiswaTable.getModel();
-                String nis = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nis + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String deleteRelatedQuery = "DELETE FROM hasil_pelaporan WHERE murid_id = ?";
-                    String deleteQuery = "DELETE FROM murid WHERE nis = ?";
-
-                    try (Connection conn = koneksi.koneksiDB()) {
-                        // Hapus data terkait di tabel hasil_pelaporan
-                        try (PreparedStatement deleteRelatedStmt = conn.prepareStatement(deleteRelatedQuery)) {
-                            deleteRelatedStmt.setString(1, nis);
-                            deleteRelatedStmt.executeUpdate();
-                        }
-
-                        // Hapus data dari tabel murid
-                        try (PreparedStatement preparedStatement = conn.prepareStatement(deleteQuery)) {
-                            preparedStatement.setString(1, nis);
-                            int affectedRows = preparedStatement.executeUpdate();
-
-                            if (affectedRows > 0) {
-                                model.removeRow(row);
-                                JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                            }
-                        }
-                    } catch (SQLIntegrityConstraintViolationException e) {
-                        JOptionPane.showMessageDialog(null, "Data tidak dapat dihapus karena ada referensi di tabel lain.", "Error", JOptionPane.ERROR_MESSAGE);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-
-        DataSiswaTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
-        DataSiswaTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,14 +84,14 @@ public class DataMurid extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        DataSiswaTable = new javax.swing.JTable();
+        DataMuridTable = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         user = new java.awt.Label();
         searchDataSiswa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        DataSiswaTable.setModel(new javax.swing.table.DefaultTableModel(
+        DataMuridTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -196,9 +107,9 @@ public class DataMurid extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        DataSiswaTable.setRowHeight(40);
-        DataSiswaTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
-        jScrollPane1.setViewportView(DataSiswaTable);
+        DataMuridTable.setRowHeight(40);
+        DataMuridTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        jScrollPane1.setViewportView(DataMuridTable);
 
         btnBack.setBackground(new java.awt.Color(204, 51, 255));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,13 +252,13 @@ public class DataMurid extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        DataSiswaTable.setModel(model);
+        DataMuridTable.setModel(model);
 
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
+                if (DataMuridTable.isEditing()) {
+                    DataMuridTable.getCellEditor().stopCellEditing();
                 }
 
                 String nis = model.getValueAt(row, 0).toString();
@@ -363,11 +274,11 @@ public class DataMurid extends javax.swing.JFrame {
 
             @Override
             public void onDelete(int row) {
-                if (DataSiswaTable.isEditing()) {
-                    DataSiswaTable.getCellEditor().stopCellEditing();
+                if (DataMuridTable.isEditing()) {
+                    DataMuridTable.getCellEditor().stopCellEditing();
                 }
 
-                DefaultTableModel model = (DefaultTableModel) DataSiswaTable.getModel();
+                DefaultTableModel model = (DefaultTableModel) DataMuridTable.getModel();
                 String nis = model.getValueAt(row, 0).toString();
 
                 int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nis + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
@@ -393,8 +304,8 @@ public class DataMurid extends javax.swing.JFrame {
             }
         };
 
-        DataSiswaTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
-        DataSiswaTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
+        DataMuridTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        DataMuridTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
     }//GEN-LAST:event_searchDataSiswaKeyReleased
 
     /**
@@ -437,7 +348,7 @@ public class DataMurid extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable DataSiswaTable;
+    private javax.swing.JTable DataMuridTable;
     private javax.swing.JButton btnBack;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

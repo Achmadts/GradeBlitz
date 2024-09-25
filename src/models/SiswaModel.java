@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
 
@@ -16,23 +17,26 @@ import koneksi.koneksi;
  *
  * @author Achmad
  */
-public class MuridModel {
+public class SiswaModel {
 
     private int userId;
     private String gen;
     private String namaKelas;
 
-    public DefaultTableModel loadDataMurid() {
+    public DefaultTableModel loadDataSiswa(String gen, String namaKelas) {
         String query = "SELECT m.nis, m.nama, k.nama_kelas, ta.gen, m.no_wa, m.alamat "
                 + "FROM murid m "
                 + "JOIN kelas k ON m.kelas_id = k.id "
-                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id ";
+                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id "
+                + "WHERE ta.id = ? AND k.nama_kelas = ?";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
             "NIS", "NAMA", "KELAS", "GEN", "NO WA", "ALAMAT", "ACTION"
         }, 0);
 
         try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, gen);
+            preparedStatement.setString(2, namaKelas);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {

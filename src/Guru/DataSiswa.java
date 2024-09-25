@@ -2,7 +2,7 @@ package Guru;
 
 //import gradeblitz.cell.TableActionCellRender;
 import Guru.Input.InputNilaiSiswa;
-import controllers.MuridController;
+import controllers.SiswaController;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,12 +24,12 @@ public class DataSiswa extends javax.swing.JFrame {
     /**
      * Creates new form InputNilai
      */
-    private final MuridController controller;
+    private final SiswaController controller;
     private HomeGuru homeFrame;
 
     public DataSiswa(HomeGuru homeFrame, String userName, int userId) {
         initComponents();
-        this.controller = new MuridController(userId, userName);
+        this.controller = new SiswaController(userId, userName);
         user.setText(userName);
         this.userId = userId;
         this.userName = userName;
