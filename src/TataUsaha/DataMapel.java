@@ -4,20 +4,8 @@
  */
 package TataUsaha;
 
-import TataUsaha.Update.UpdateDataMapel;
+import controllers.DataMapelController;
 import java.awt.Color;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import koneksi.koneksi;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import pelaporan.cell.TableActionCellEditor;
-import pelaporan.cell.TableActionCellRender;
-import pelaporan.cell.TableActionEvent;
 
 /**
  *
@@ -28,15 +16,15 @@ public class DataMapel extends javax.swing.JFrame {
     /**
      * Creates new form DataMapel
      */
+    private DataMapelController controller;
     private HomeTataUsaha homeFrame;
 
     public DataMapel(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new DataMapelController(userId);
         user.setText(userName);
-        loadDataMapel();
+        controller.loadDataMapel(DataMapelTable);
     }
 
     private int roleId;
@@ -214,164 +202,13 @@ public class DataMapel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchDataMapelFocusLost
 
-    public void loadDataMapel() {
-        String query = "SELECT * FROM mapel ";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "NAMA MAPEL", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-                while (resultSet.next()) {
-                    String id_mapel = resultSet.getString("id");
-                    String namaMapel = resultSet.getString("nama_mapel");
-
-                    model.addRow(new Object[]{id_mapel, namaMapel});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataMapelTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataMapelTable.isEditing()) {
-                    DataMapelTable.getCellEditor().stopCellEditing();
-                }
-
-                String idMapel = model.getValueAt(row, 0).toString();
-                String namaMapel = model.getValueAt(row, 1).toString();
-
-                UpdateDataMapel UpdateDataMapelForm = new UpdateDataMapel(userId, idMapel, namaMapel);
-                UpdateDataMapelForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataMapelTable.isEditing()) {
-                    DataMapelTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataMapelTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM mapel WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataMapelTable.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender());
-        DataMapelTable.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event));
-    }
-
     private void searchDataMapelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataMapelKeyReleased
         String searchText = searchDataMapel.getText();
-
-        String query = "SELECT * FROM mapel "
-                + "WHERE nama_mapel LIKE ?";
-
-        // Buat model tabel
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "NAMA MAPEL", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, "%" + searchText + "%");
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-
-                model.setRowCount(0);
-
-                while (resultSet.next()) {
-                    String idMapel = resultSet.getString("id");
-                    String namaMapel = resultSet.getString("nama_mapel");
-
-                    model.addRow(new Object[]{idMapel, namaMapel});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataMapelTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataMapelTable.isEditing()) {
-                    DataMapelTable.getCellEditor().stopCellEditing();
-                }
-
-                String idMapel = model.getValueAt(row, 0).toString();
-                String namaMapel = model.getValueAt(row, 1).toString();
-
-                UpdateDataMapel UpdateDataMapelForm = new UpdateDataMapel(userId, idMapel, namaMapel);
-                UpdateDataMapelForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataMapelTable.isEditing()) {
-                    DataMapelTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataMapelTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM mapel WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataMapelTable.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender());
-        DataMapelTable.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event));
+        controller.searchMapel(searchText, DataMapelTable);
     }//GEN-LAST:event_searchDataMapelKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        loadDataMapel();
+        controller.loadDataMapel(DataMapelTable);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
