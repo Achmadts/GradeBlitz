@@ -4,19 +4,8 @@
  */
 package TataUsaha;
 
-import TataUsaha.Update.UpdateDataKelas;
+import controllers.DataKelasController;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import koneksi.koneksi;
-import pelaporan.cell.TableActionCellEditor;
-import pelaporan.cell.TableActionCellRender;
-import pelaporan.cell.TableActionEvent;
 
 /**
  *
@@ -27,15 +16,15 @@ public class DataKelas extends javax.swing.JFrame {
     /**
      * Creates new form DataKelas
      */
+    private DataKelasController controller;
     private HomeTataUsaha homeFrame;
 
     public DataKelas(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new DataKelasController(userId);
         user.setText(userName);
-        loadDataKelas();
+        controller.loadDataKelas(DataKelasTable);  // Load data on initialization
     }
 
     private int roleId;
@@ -199,176 +188,9 @@ public class DataKelas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchDataKelasFocusLost
 
-    public void loadDataKelas() {
-        String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
-                + "FROM kelas k "
-                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id ";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-
-                model.setRowCount(0);
-
-                while (resultSet.next()) {
-                    String id_kelas = resultSet.getString("id");
-                    String namaKelas = resultSet.getString("nama_kelas");
-                    String jurusan = resultSet.getString("jurusan");
-                    String gen = resultSet.getString("gen");
-
-                    model.addRow(new Object[]{id_kelas, namaKelas, jurusan, gen});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataKelasTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataKelasTable.isEditing()) {
-                    DataKelasTable.getCellEditor().stopCellEditing();
-                }
-
-                int idKelas = Integer.parseInt(model.getValueAt(row, 0).toString());
-                String namaKelas = model.getValueAt(row, 1).toString();
-                String jurusan = model.getValueAt(row, 2).toString();
-                String gen = model.getValueAt(row, 3).toString();
-
-                UpdateDataKelas UpdateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
-                UpdateDataKelasForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataKelasTable.isEditing()) {
-                    DataKelasTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataKelasTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan id: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM kelas WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataKelasTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
-        DataKelasTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
-    }
-
     private void searchDataKelasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataKelasKeyReleased
         String searchText = searchDataKelas.getText();
-
-        String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
-                + "FROM kelas k "
-                + "JOIN tahun_ajaran ta ON k.gen_id = ta.id "
-                + "WHERE (k.nama_kelas LIKE ? OR k.jurusan LIKE ?)";
-
-        // Buat model tabel
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "NAMA KELAS", "JURUSAN", "ANGKATAN", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, "%" + searchText + "%");
-            pstmt.setString(2, "%" + searchText + "%");
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-
-                model.setRowCount(0);
-
-                while (resultSet.next()) {
-                    String id_kelas = resultSet.getString("id");
-                    String namaKelas = resultSet.getString("nama_kelas");
-                    String jurusan = resultSet.getString("jurusan");
-                    String gen = resultSet.getString("gen");
-
-                    model.addRow(new Object[]{id_kelas, namaKelas, jurusan, gen});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataKelasTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataKelasTable.isEditing()) {
-                    DataKelasTable.getCellEditor().stopCellEditing();
-                }
-
-                int idKelas = Integer.parseInt(model.getValueAt(row, 0).toString());
-                String namaKelas = model.getValueAt(row, 1).toString();
-                String jurusan = model.getValueAt(row, 2).toString();
-                String gen = model.getValueAt(row, 3).toString();
-
-                UpdateDataKelas UpdateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
-                UpdateDataKelasForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataKelasTable.isEditing()) {
-                    DataKelasTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataKelasTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan id: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM kelas WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataKelasTable.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
-        DataKelasTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        controller.searchDataKelas(searchText, DataKelasTable);
     }//GEN-LAST:event_searchDataKelasKeyReleased
 
     /**
