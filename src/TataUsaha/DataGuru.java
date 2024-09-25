@@ -4,25 +4,8 @@
  */
 package TataUsaha;
 
-import Guru.Input.InputNilaiSiswa;
-import TataUsaha.Update.UpdateDataGuru;
+import controllers.DataGuruController;
 import java.awt.Color;
-import java.awt.Component;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-import koneksi.koneksi;
-import pelaporan.cell.TableActionCellEditor;
-import pelaporan.cell.TableActionCellRender;
-import pelaporan.cell.TableActionEvent;
 
 /**
  *
@@ -33,17 +16,15 @@ public class DataGuru extends javax.swing.JFrame {
     /**
      * Creates new form DataGuru
      */
+    private DataGuruController controller;
     private HomeTataUsaha homeFrame;
-    public String nip;
-//    private String gen;
 
     public DataGuru(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new DataGuruController(userId, userName);
         user.setText(userName);
-        loadDataGuru();
+        controller.loadDataGuru(DataGuruTable);  // Load data on form initialization
     }
 
     private int roleId;
@@ -195,87 +176,6 @@ public class DataGuru extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void loadDataGuru() {
-        String query = "SELECT nip, full_name, email, password, guruMapel FROM users WHERE role_id = 2";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "NIP", "NAMA GURU", "EMAIL", "PASSWORD", "MAPEL", "ACTION"
-        }, 0);
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); Statement st = conn.createStatement(); ResultSet resultSet = st.executeQuery(query)) {
-
-            while (resultSet.next()) {
-                String nip = resultSet.getString("nip");
-                String fullName = resultSet.getString("full_name");
-                String email = resultSet.getString("email");
-                String password = resultSet.getString("password");
-                String guruMapel = resultSet.getString("guruMapel");
-
-                model.addRow(new Object[]{nip, fullName, email, password, guruMapel});
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataGuruTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataGuruTable.isEditing()) {
-                    DataGuruTable.getCellEditor().stopCellEditing();
-                }
-
-                String nip = model.getValueAt(row, 0).toString();
-                String fullName = model.getValueAt(row, 1).toString();
-                String email_guru = model.getValueAt(row, 2).toString();
-                String password = model.getValueAt(row, 3).toString();
-                String mapel_guru = model.getValueAt(row, 4).toString();
-
-                // Pastikan this adalah instance dari DataGuru
-                UpdateDataGuru UpdateDataGuruForm = new UpdateDataGuru(nip, userId, fullName, email_guru, password, mapel_guru);
-                UpdateDataGuruForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataGuruTable.isEditing()) {
-                    DataGuruTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataGuruTable.getModel();
-                String nip = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nip + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM users WHERE nip = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, nip);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-
-        DataGuruTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
-        DataGuruTable.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
-    }
-
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
         homeFrame.setVisible(true);
@@ -297,102 +197,12 @@ public class DataGuru extends javax.swing.JFrame {
     }//GEN-LAST:event_searchDataGuruFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        loadDataGuru();
+        controller.loadDataGuru(DataGuruTable);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void searchDataGuruKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataGuruKeyReleased
         String searchText = searchDataGuru.getText();
-
-        String query = "SELECT nip, full_name, email, password, guruMapel FROM users WHERE role_id = 2 AND (nip LIKE ? OR full_name LIKE ?)";
-
-        // Buat model tabel
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "NIP", "NAMA GURU", "EMAIL", "PASSWORD", "MAPEL", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            // Set parameter untuk pencarian
-            pstmt.setString(1, "%" + searchText + "%");
-            pstmt.setString(2, "%" + searchText + "%");
-
-            // Jalankan query
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-
-                // Kosongkan tabel sebelum mengisi data baru
-                model.setRowCount(0);
-
-                // Tambahkan hasil query ke model tabel
-                while (resultSet.next()) {
-                    String nip = resultSet.getString("nip");
-                    String fullName = resultSet.getString("full_name");
-                    String email = resultSet.getString("email");
-                    String password = resultSet.getString("password");
-                    String guruMapel = resultSet.getString("guruMapel");
-
-                    model.addRow(new Object[]{nip, fullName, email, password, guruMapel});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataGuruTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataGuruTable.isEditing()) {
-                    DataGuruTable.getCellEditor().stopCellEditing();
-                }
-
-                String nip = model.getValueAt(row, 0).toString();
-                String fullName = model.getValueAt(row, 1).toString();
-                String email_guru = model.getValueAt(row, 2).toString();
-                String password = model.getValueAt(row, 3).toString();
-                String mapel_guru = model.getValueAt(row, 4).toString();
-
-                // Pastikan this adalah instance dari DataGuru
-                UpdateDataGuru UpdateDataGuruForm = new UpdateDataGuru(nip, userId, fullName, email_guru, password, mapel_guru);
-                UpdateDataGuruForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataGuruTable.isEditing()) {
-                    DataGuruTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataGuruTable.getModel();
-                String nip = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan NIS: " + nip + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM users WHERE nip = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, nip);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-
-        DataGuruTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
-        DataGuruTable.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
+        controller.searchDataGuru(searchText, DataGuruTable);
     }//GEN-LAST:event_searchDataGuruKeyReleased
 
     /**
