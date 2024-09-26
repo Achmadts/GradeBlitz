@@ -4,19 +4,8 @@
  */
 package TataUsaha;
 
-import TataUsaha.Update.UpdateDataTahunAjaran;
+import controllers.DataTahunAjaranController;
 import java.awt.Color;
-import javax.swing.table.DefaultTableModel;
-import koneksi.koneksi;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import javax.swing.JOptionPane;
-import pelaporan.cell.TableActionCellEditor;
-import pelaporan.cell.TableActionCellRender;
-import pelaporan.cell.TableActionEvent;
 
 /**
  *
@@ -27,15 +16,15 @@ public class DataTahunAjaran extends javax.swing.JFrame {
     /**
      * Creates new form DataTahunAjaran
      */
+    private DataTahunAjaranController controller;
     private HomeTataUsaha homeFrame;
 
     public DataTahunAjaran(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
+        this.controller = new DataTahunAjaranController(userId);
         user.setText(userName);
-        loadDataTahunAjaran();
+        controller.loadDataTahunAjaran(DataTahunAjaranTable);
     }
 
     private int roleId;
@@ -180,9 +169,9 @@ public class DataTahunAjaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
+        String hariDipilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
         homeFrame.setVisible(true);
-        homeFrame.loadJadwalData(hariDiPilih);
+        homeFrame.loadJadwalData(hariDipilih);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -200,166 +189,9 @@ public class DataTahunAjaran extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchDataTAFocusLost
 
-    public void loadDataTahunAjaran() {
-        String query = "SELECT * FROM tahun_ajaran ";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "TAHUN AJARAN", "GEN", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String idTA = resultSet.getString("id");
-                    String tahun_ajaran = resultSet.getString("tahun_ajaran");
-                    String gen = resultSet.getString("gen");
-                    model.addRow(new Object[]{idTA, tahun_ajaran, gen});
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataTahunAjaranTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataTahunAjaranTable.isEditing()) {
-                    DataTahunAjaranTable.getCellEditor().stopCellEditing();
-                }
-
-                String idTA = model.getValueAt(row, 0).toString();
-                String tahun_ajaran = model.getValueAt(row, 1).toString();
-                String gen = model.getValueAt(row, 2).toString();
-
-                UpdateDataTahunAjaran UpdateDataTahunAjaranForm = new UpdateDataTahunAjaran(userId, idTA, tahun_ajaran, gen);
-                UpdateDataTahunAjaranForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataTahunAjaranTable.isEditing()) {
-                    DataTahunAjaranTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataTahunAjaranTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM tahun_ajaran WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataTahunAjaranTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-        DataTahunAjaranTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
-    }
-
-
     private void searchDataTAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDataTAKeyReleased
         String searchText = searchDataTA.getText();
-
-        String query = "SELECT * FROM tahun_ajaran "
-                + "WHERE tahun_ajaran LIKE ? OR gen LIKE ?";
-
-        // Buat model tabel
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "TAHUN AJARAN", "GEN", "ACTION"
-        }, 0);
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, "%" + searchText + "%");
-            pstmt.setString(2, "%" + searchText + "%");
-
-            try (ResultSet resultSet = pstmt.executeQuery()) {
-
-                model.setRowCount(0);
-
-                while (resultSet.next()) {
-                    String idTA = resultSet.getString("id");
-                    String tahun_ajaran = resultSet.getString("tahun_ajaran");
-                    String gen = resultSet.getString("gen");
-
-                    model.addRow(new Object[]{idTA, tahun_ajaran, gen});
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        DataTahunAjaranTable.setModel(model);
-
-        TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                if (DataTahunAjaranTable.isEditing()) {
-                    DataTahunAjaranTable.getCellEditor().stopCellEditing();
-                }
-
-                String idTA = model.getValueAt(row, 0).toString();
-                String tahun_ajaran = model.getValueAt(row, 1).toString();
-                String gen = model.getValueAt(row, 2).toString();
-
-                UpdateDataTahunAjaran UpdateDataTahunAjaranForm = new UpdateDataTahunAjaran(userId, idTA, tahun_ajaran, gen);
-                UpdateDataTahunAjaranForm.setVisible(true);
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (DataTahunAjaranTable.isEditing()) {
-                    DataTahunAjaranTable.getCellEditor().stopCellEditing();
-                }
-
-                DefaultTableModel model = (DefaultTableModel) DataTahunAjaranTable.getModel();
-                String id = model.getValueAt(row, 0).toString();
-
-                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data dengan ID: " + id + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
-
-                if (confirm == JOptionPane.YES_OPTION) {
-                    String query = "DELETE FROM tahun_ajaran WHERE id = ?";
-
-                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                        preparedStatement.setString(1, id);
-                        int affectedRows = preparedStatement.executeUpdate();
-
-                        if (affectedRows > 0) {
-                            model.removeRow(row);
-                            JOptionPane.showMessageDialog(null, "Data berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Data gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        };
-        DataTahunAjaranTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-        DataTahunAjaranTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        controller.searchDataTahunAjaran(searchText, DataTahunAjaranTable);
     }//GEN-LAST:event_searchDataTAKeyReleased
 
     /**
@@ -392,7 +224,10 @@ public class DataTahunAjaran extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new DataTahunAjaran().setVisible(true);
+                HomeTataUsaha homeFrame = new HomeTataUsaha();
+                String userName = "UserNameTest";
+                int userId = 1;
+                new DataTahunAjaran(homeFrame, userName, userId).setVisible(true);
             }
         });
     }
