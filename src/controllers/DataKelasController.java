@@ -21,10 +21,12 @@ public class DataKelasController {
 
     private DataKelasModel model;
     private int userId;
+    private String userName;
 
-    public DataKelasController(int userId) {
+    public DataKelasController(int userId, String userName) {
         this.model = new DataKelasModel();
         this.userId = userId;
+        this.userName = this.userName;
     }
 
     public void loadDataKelas(JTable DataKelasTable) {

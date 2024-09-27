@@ -5,10 +5,6 @@
 package TataUsaha;
 
 import TataUsaha.Input.InputDataGuru;
-import koneksi.koneksi;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +13,9 @@ import TataUsaha.Input.InputDataKelas;
 import TataUsaha.Input.InputDataMapel;
 import TataUsaha.Input.InputDataSiswa;
 import TataUsaha.Input.InputTahunAjaran;
+import javax.swing.JTable;
 import loginandsignup.Login;
+import models.TataUsahaModel;
 
 /**
  *
@@ -28,13 +26,44 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     /**
      * Creates new form HomeTataUsaha
      */
-    public HomeTataUsaha() {
+    private int userId;
+    private String username;
+
+    public HomeTataUsaha(int userId, String username) {
+        this.userId = userId;
         initComponents();
+        this.user.setText(username);
         String hariDiPilih = comboBoxHari.getSelectedItem().toString();
         loadJadwalData(hariDiPilih);
+        comboBoxHari.addActionListener(e -> loadJadwalData(comboBoxHari.getSelectedItem().toString()));
+        LogOutBtn.addActionListener(e -> logOut());
     }
 
-    private int userId;
+    public void loadJadwalData(String hari) {
+        TataUsahaModel TataUsahaModel = new TataUsahaModel(userId);
+        DefaultTableModel jadwalModel = TataUsahaModel.getJadwalData(hari);
+        jadwalTableTataUsaha.setModel(jadwalModel);
+    }
+
+    private void logOut() {
+        int response = JOptionPane.showConfirmDialog(this, "Yakin mau Logout?", "Confirm Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {
+            Login LoginFrame = new Login();
+            LoginFrame.setVisible(true);
+            LoginFrame.pack();
+            LoginFrame.setLocationRelativeTo(null);
+            this.dispose();
+        }
+    }
+
+    public JTable getJadwalTable() {
+        return jadwalTableTataUsaha;
+    }
+
+    public JComboBox<String> getComboBoxHari() {
+        return comboBoxHari;
+    }
 
     public void setUserId(int userId) {
         this.userId = userId;
@@ -54,10 +83,6 @@ public class HomeTataUsaha extends javax.swing.JFrame {
 
     public void setUser(String name) {
         user.setText(name);
-    }
-
-    public JComboBox<String> getComboBoxHari() {
-        return comboBoxHari;
     }
 
 //    public void setRole(String roleText) {
@@ -346,57 +371,13 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loadJadwalData(String hari) {
-        String query = "SELECT jp.id, u.full_name, m.nama_mapel, jp.hari, jp.jam, u.nip, jp.ruang, jp.user_id "
-                + "FROM jadwal_pelajaran jp "
-                + "JOIN users u ON jp.user_id = u.nip "
-                + "JOIN mapel m ON jp.mapel_id = m.id "
-                + "WHERE jp.hari = '" + hari + "'";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "JAM KE", "JAM", "NIP", "NAMA", "MAPEL", "RUANG"
-        }, 0);
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); Statement st = conn.createStatement(); ResultSet resultSet = st.executeQuery(query)) {
-
-            int jamKe = 1;
-
-            while (resultSet.next() && jamKe <= 10) {
-                String jam = resultSet.getString("jam");
-                String nip = resultSet.getString("nip");
-                String fullName = resultSet.getString("full_name");
-                String namaMapel = resultSet.getString("nama_mapel");
-                String ruang = resultSet.getString("ruang");
-
-                model.addRow(new Object[]{jamKe, jam, nip, fullName, namaMapel, ruang});
-
-                jamKe++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        jadwalTableTataUsaha.setModel(model);
-    }
-
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(this, "Yakin mau Logout?", "Confirm Logout", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-        if (response == JOptionPane.YES_OPTION) {
-            Login LoginFrame = new Login();
-            LoginFrame.setVisible(true);
-            LoginFrame.pack();
-            LoginFrame.setLocationRelativeTo(null);
-            this.dispose();
-        }
-    }//GEN-LAST:event_LogOutBtnActionPerformed
+        String hariDiPilih = (String) comboBoxHari.getSelectedItem();
+     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void comboBoxHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxHariActionPerformed
         String hariDiPilih = (String) comboBoxHari.getSelectedItem();
-        loadJadwalData(hariDiPilih);
-    }//GEN-LAST:event_comboBoxHariActionPerformed
+        loadJadwalData(hariDiPilih);    }//GEN-LAST:event_comboBoxHariActionPerformed
 
     private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
 //        
@@ -553,7 +534,7 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeTataUsaha().setVisible(true);
+//                new HomeTataUsaha().setVisible(true);
             }
         });
     }

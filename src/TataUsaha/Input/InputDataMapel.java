@@ -224,10 +224,10 @@ public class InputDataMapel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HomeTataUsaha homeFrame = new HomeTataUsaha();
-                String userName = "NamaPenggunaTest";
-                int userId = 1;
-                new InputDataMapel(homeFrame, userName, userId).setVisible(true);
+//                HomeTataUsaha homeFrame = new HomeTataUsaha();
+//                String userName = "NamaPenggunaTest";
+//                int userId = 1;
+//                new InputDataMapel(homeFrame, userName, userId).setVisible(true);
             }
         });
     }

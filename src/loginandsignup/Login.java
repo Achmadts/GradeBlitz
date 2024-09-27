@@ -241,7 +241,7 @@ public class Login extends javax.swing.JFrame {
                         username = fname;
 
                         if (role == 1) {
-                            HomeTataUsaha HomeFrame = new HomeTataUsaha();
+                            HomeTataUsaha HomeFrame = new HomeTataUsaha(userId, username);
                             HomeFrame.setUserId(userIdFromDb);
                             HomeFrame.setUser(fname);
                             HomeFrame.setVisible(true);

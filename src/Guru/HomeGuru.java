@@ -5,7 +5,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import loginandsignup.Login;
 import models.GuruModel;
-//import java.util.ArrayList;
 
 public class HomeGuru extends javax.swing.JFrame {
 

@@ -22,7 +22,7 @@ public class DataKelas extends javax.swing.JFrame {
     public DataKelas(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
-        this.controller = new DataKelasController(userId);
+        this.controller = new DataKelasController(userId, userName);
         user.setText(userName);
         controller.loadDataKelas(DataKelasTable);  // Load data on initialization
     }
@@ -223,10 +223,10 @@ public class DataKelas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HomeTataUsaha homeFrame = new HomeTataUsaha();
-                String userName = "NamaPenggunaTest";
                 int userId = 1;
-                new DataKelas(homeFrame, userName, userId).setVisible(true);
+                String username = "NamaPenggunaTest";
+                HomeTataUsaha homeFrame = new HomeTataUsaha(userId, username);
+                new DataKelas(homeFrame, username, userId).setVisible(true);
             }
         });
     }
