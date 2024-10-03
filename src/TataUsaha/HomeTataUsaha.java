@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TataUsaha;
 
 import TataUsaha.Input.InputDataGuru;
@@ -13,24 +9,24 @@ import TataUsaha.Input.InputDataKelas;
 import TataUsaha.Input.InputDataMapel;
 import TataUsaha.Input.InputDataSiswa;
 import TataUsaha.Input.InputTahunAjaran;
+import TataUsaha.Update.UpdateDataJadwal;
 import javax.swing.JTable;
 import loginandsignup.Login;
 import models.TataUsahaModel;
+import pelaporan.cell.TableActionCellEditor;
+import pelaporan.cell.TableActionCellRender;
+import pelaporan.cell.TableActionEvent;
 
-/**
- *
- * @author Achmad
- */
 public class HomeTataUsaha extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomeTataUsaha
-     */
     private int userId;
     private String username;
+    private TataUsahaModel tataUsahaModel;
 
     public HomeTataUsaha(int userId, String username) {
         this.userId = userId;
+        this.username = username;
+        this.tataUsahaModel = new TataUsahaModel(userId);
         initComponents();
         this.user.setText(username);
         String hariDiPilih = comboBoxHari.getSelectedItem().toString();
@@ -40,9 +36,36 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     }
 
     public void loadJadwalData(String hari) {
-        TataUsahaModel TataUsahaModel = new TataUsahaModel(userId);
-        DefaultTableModel jadwalModel = TataUsahaModel.getJadwalData(hari);
+        DefaultTableModel jadwalModel = tataUsahaModel.getJadwalData(hari);
         jadwalTableTataUsaha.setModel(jadwalModel);
+
+        DefaultTableModel tableModel = tataUsahaModel.getJadwalData(hari);
+        jadwalTableTataUsaha.setModel(tableModel);
+
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                int jadwalId = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+                String jam = tableModel.getValueAt(row, 1).toString();
+                String nip = tableModel.getValueAt(row, 2).toString();
+                String mapel = tableModel.getValueAt(row, 4).toString();
+                String ruang = tableModel.getValueAt(row, 5).toString();
+                String hari = tableModel.getValueAt(row, 6).toString();
+
+                System.out.println("NIP: " + nip);
+
+                UpdateDataJadwal updateForm = new UpdateDataJadwal(jadwalId, nip, mapel, hari, jam, ruang);
+                updateForm.setVisible(true);
+            }
+
+            @Override
+            public void onDelete(int row) {
+                // Logika penghapusan
+            }
+        };
+
+        jadwalTableTataUsaha.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());
+        jadwalTableTataUsaha.getColumnModel().getColumn(7).setCellEditor(new TableActionCellEditor(event));
     }
 
     private void logOut() {
@@ -135,9 +158,18 @@ public class HomeTataUsaha extends javax.swing.JFrame {
 
             },
             new String [] {
-                "JAM KE", "JAM", "NIP", "NAMA", "MAPEL", "RUANG"
+                "JAM KE", "JAM", "NIP", "NAMA", "MAPEL", "RUANG", "HARI", "ACTION"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jadwalTableTataUsaha.setRowHeight(40);
         jScrollPane1.setViewportView(jadwalTableTataUsaha);
 
         user.setAlignment(java.awt.Label.RIGHT);

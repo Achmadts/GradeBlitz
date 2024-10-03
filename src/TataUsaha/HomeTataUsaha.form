@@ -227,15 +227,18 @@
             <Component class="javax.swing.JTable" name="jadwalTableTataUsaha">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="0">
-                    <Column editable="true" title="JAM KE" type="java.lang.Object"/>
-                    <Column editable="true" title="JAM" type="java.lang.Object"/>
-                    <Column editable="true" title="NIP" type="java.lang.Object"/>
-                    <Column editable="true" title="NAMA" type="java.lang.Object"/>
-                    <Column editable="true" title="MAPEL" type="java.lang.Object"/>
-                    <Column editable="true" title="RUANG" type="java.lang.Object"/>
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="JAM KE" type="java.lang.Object"/>
+                    <Column editable="false" title="JAM" type="java.lang.Object"/>
+                    <Column editable="false" title="NIP" type="java.lang.Object"/>
+                    <Column editable="false" title="NAMA" type="java.lang.Object"/>
+                    <Column editable="false" title="MAPEL" type="java.lang.Object"/>
+                    <Column editable="false" title="RUANG" type="java.lang.Object"/>
+                    <Column editable="false" title="HARI" type="java.lang.Object"/>
+                    <Column editable="true" title="ACTION" type="java.lang.Object"/>
                   </Table>
                 </Property>
+                <Property name="rowHeight" type="int" value="40"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>

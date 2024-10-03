@@ -4,14 +4,8 @@
  */
 package TataUsaha.Update;
 
-import TataUsaha.DataGuru;
-import TataUsaha.HomeTataUsaha;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JTextField;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import koneksi.koneksi;
+import controllers.updateDataGuruController;
+import models.updateDataGuruModel;
 
 /**
  *
@@ -19,19 +13,12 @@ import koneksi.koneksi;
  */
 public class UpdateDataGuru extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateDataGuru
-     */
-    private String nip, full_name, email, password, guruMapel;
-    private int userId;
+    private updateDataGuruController controller;
+    private updateDataGuruModel guru;
 
     public UpdateDataGuru(String nip, int userId, String full_name, String email, String password, String guruMapel) {
-        this.nip = nip;
-        this.userId = userId;
-        this.full_name = full_name;
-        this.email = email;
-        this.password = password;
-        this.guruMapel = guruMapel;
+        guru = new updateDataGuruModel(nip, full_name, email, password, guruMapel);
+        controller = new updateDataGuruController();
         initComponents();
 
         nipGuru.setText(nip);
@@ -249,29 +236,6 @@ public class UpdateDataGuru extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void updateDataGuru() {
-        String query = "UPDATE users SET full_name = ?, email = ?, password = ?, guruMapel = ? WHERE nip = ?";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, namaGuru.getText());
-            preparedStatement.setString(2, emailGuru.getText());
-            preparedStatement.setString(3, passwordGuru.getText());
-            preparedStatement.setString(4, (String) mapelGuru.getSelectedItem());
-            preparedStatement.setString(5, nipGuru.getText());
-
-            int rowsUpdated = preparedStatement.executeUpdate();
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(this, "Data guru berhasil diperbarui. Harap refresh halaman data guru", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Gagal memperbarui data guru. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal memperbarui data guru.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     private void namaGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaGuruFocusGained
 
     }//GEN-LAST:event_namaGuruFocusGained
@@ -301,8 +265,12 @@ public class UpdateDataGuru extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordGuruFocusLost
 
     private void btnKirimDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataGuruActionPerformed
-        updateDataGuru();
-    }//GEN-LAST:event_btnKirimDataGuruActionPerformed
+        guru.setFullName(namaGuru.getText());
+        guru.setEmail(emailGuru.getText());
+        guru.setPassword(passwordGuru.getText());
+        guru.setGuruMapel((String) mapelGuru.getSelectedItem());
+
+        controller.updateDataGuru(guru);    }//GEN-LAST:event_btnKirimDataGuruActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.dispose();
