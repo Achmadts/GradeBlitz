@@ -13,8 +13,8 @@ public class updateDataJadwalController {
         String query = "UPDATE jadwal_pelajaran SET user_id = ?, mapel_id = ?, hari = ?, jam = ?, ruang = ? WHERE id = ?";
 
         try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, userId);  // Use userId
-            preparedStatement.setString(2, mapelId);  // Use mapelId
+            preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, mapelId);
             preparedStatement.setString(3, jadwal.getHari());
             preparedStatement.setString(4, jadwal.getJam());
             preparedStatement.setString(5, jadwal.getRuang());

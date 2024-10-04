@@ -59,7 +59,7 @@ public class TataUsahaModel {
         try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                model.addElement(id); // Menambahkan ID mapel ke model
+                model.addElement(id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
