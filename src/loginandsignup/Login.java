@@ -6,12 +6,10 @@ import Guru.HomeGuru;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
-//import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Login extends javax.swing.JFrame {
 
