@@ -120,11 +120,33 @@ public class DataGuruController {
 
             @Override
             public void onDelete(int row) {
-//                String nip = model.getValueAt(row, 0).toString();
-//
-//                if (DataGuruModel.this.deleteGuru(nip)) {
-//                    model.removeRow(row);
-//                }
+                if (DataGuruTable.isEditing()) {
+                    DataGuruTable.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) DataGuruTable.getModel();
+                String nip = model.getValueAt(row, 0).toString();
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data guru dengan NIP: " + nip + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM users WHERE nip = ? AND role_id = 2";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setString(1, nip);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Data guru berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Data guru gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data guru.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         };
 

@@ -13,6 +13,10 @@ import TataUsaha.Update.UpdateDataJadwal;
 import javax.swing.JTable;
 import loginandsignup.Login;
 import models.TataUsahaModel;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import koneksi.koneksi;
+import java.sql.SQLException;
 import pelaporan.cell.TableActionCellEditor;
 import pelaporan.cell.TableActionCellRender;
 import pelaporan.cell.TableActionEvent;
@@ -58,8 +62,35 @@ public class HomeTataUsaha extends javax.swing.JFrame {
 
             @Override
             public void onDelete(int row) {
-                // Logika penghapusan
+                if (jadwalTableTataUsaha.isEditing()) {
+                    jadwalTableTataUsaha.getCellEditor().stopCellEditing();
+                }
+
+                DefaultTableModel model = (DefaultTableModel) jadwalTableTataUsaha.getModel();
+                int jadwalId = Integer.parseInt(model.getValueAt(row, 0).toString());
+
+                int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus jadwal dengan ID: " + jadwalId + "?", "Konfirmasi Penghapusan", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    String query = "DELETE FROM jadwal_pelajaran WHERE id = ?";
+
+                    try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+                        preparedStatement.setInt(1, jadwalId);
+                        int affectedRows = preparedStatement.executeUpdate();
+
+                        if (affectedRows > 0) {
+                            model.removeRow(row);
+                            JOptionPane.showMessageDialog(null, "Jadwal berhasil dihapus.", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Jadwal gagal dihapus dari database.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus jadwal.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
+
         };
 
         jadwalTableTataUsaha.getColumnModel().getColumn(7).setCellRenderer(new TableActionCellRender());

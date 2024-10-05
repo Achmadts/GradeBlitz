@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import models.DataKelasModel;
@@ -13,10 +9,6 @@ import pelaporan.cell.TableActionEvent;
 import TataUsaha.Update.UpdateDataKelas;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Achmad
- */
 public class DataKelasController {
 
     private DataKelasModel model;
@@ -33,16 +25,15 @@ public class DataKelasController {
         DefaultTableModel tableModel = model.loadDataKelas();
         DataKelasTable.setModel(tableModel);
 
-        // Add table actions (edit and delete)
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 int idKelas = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                 String namaKelas = tableModel.getValueAt(row, 1).toString();
                 String jurusan = tableModel.getValueAt(row, 2).toString();
-                String gen = tableModel.getValueAt(row, 3).toString();
-
-                UpdateDataKelas updateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
+                int gen = Integer.parseInt(tableModel.getValueAt(row, 3).toString());
+                
+                UpdateDataKelas updateDataKelasForm = new UpdateDataKelas(idKelas, gen, namaKelas, jurusan, gen);
                 updateDataKelasForm.setVisible(true);
             }
 
@@ -64,21 +55,19 @@ public class DataKelasController {
         DataKelasTable.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
     }
 
-    // Search for kelas data based on searchText and set to table
     public void searchDataKelas(String searchText, JTable DataKelasTable) {
         DefaultTableModel tableModel = model.searchKelas(searchText);
         DataKelasTable.setModel(tableModel);
 
-        // Add table actions (edit and delete)
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 int idKelas = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                 String namaKelas = tableModel.getValueAt(row, 1).toString();
                 String jurusan = tableModel.getValueAt(row, 2).toString();
-                String gen = tableModel.getValueAt(row, 3).toString();
+                int gen = Integer.parseInt(tableModel.getValueAt(row, 3).toString());
 
-                UpdateDataKelas updateDataKelasForm = new UpdateDataKelas(userId, idKelas, namaKelas, jurusan, gen);
+                UpdateDataKelas updateDataKelasForm = new UpdateDataKelas(idKelas, gen, namaKelas, jurusan, gen);
                 updateDataKelasForm.setVisible(true);
             }
 

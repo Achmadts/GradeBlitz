@@ -3,7 +3,6 @@ package loginandsignup;
 import TataUsaha.HomeTataUsaha;
 import koneksi.koneksi;
 import Guru.HomeGuru;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -46,8 +45,9 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         email = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
         LoginBtn = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
+        showPW = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,10 +65,6 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 339, 310, 20));
 
-        password.setBackground(new java.awt.Color(235, 239, 255));
-        password.setBorder(null);
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 407, 310, 20));
-
         LoginBtn.setBackground(new java.awt.Color(95, 207, 248));
         LoginBtn.setForeground(new java.awt.Color(255, 225, 255));
         LoginBtn.setText("Login");
@@ -84,6 +80,20 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(LoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 474, 310, 22));
+
+        password.setBackground(new java.awt.Color(235, 239, 255));
+        password.setBorder(null);
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 407, 310, 20));
+
+        showPW.setBackground(new java.awt.Color(235, 239, 255));
+        showPW.setForeground(new java.awt.Color(60, 63, 65));
+        showPW.setText("Show Passwod");
+        showPW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPWActionPerformed(evt);
+            }
+        });
+        getContentPane().add(showPW, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Login Pagelogin page.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -108,6 +118,14 @@ public class Login extends javax.swing.JFrame {
             LoginMethod();
         }
     }//GEN-LAST:event_LoginBtnKeyPressed
+
+    private void showPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPWActionPerformed
+        if (showPW.isSelected()) {
+            password.setEchoChar((char) 0);
+        } else {
+            password.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showPWActionPerformed
 
     public void LoginMethod() {
         String Email, Password, query, fname = null, passDb = null;
@@ -209,6 +227,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton LoginBtn;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JCheckBox showPW;
     // End of variables declaration//GEN-END:variables
 }

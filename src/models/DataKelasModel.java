@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.sql.Connection;
@@ -12,12 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
 
-/**
- *
- * @author Achmad
- */
 public class DataKelasModel {
-    // Method to load kelas data from database
 
     public DefaultTableModel loadDataKelas() {
         String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
@@ -48,7 +39,6 @@ public class DataKelasModel {
         return model;
     }
 
-    // Method to delete kelas by ID
     public boolean deleteKelas(String id) {
         String query = "DELETE FROM kelas WHERE id = ?";
         try (Connection conn = koneksi.koneksiDB(); PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -62,7 +52,6 @@ public class DataKelasModel {
         }
     }
 
-    // Method to search kelas based on name or major
     public DefaultTableModel searchKelas(String searchText) {
         String query = "SELECT k.id, k.nama_kelas, k.jurusan, ta.gen "
                 + "FROM kelas k "
@@ -91,7 +80,6 @@ public class DataKelasModel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Data gagal dimuat", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
         return model;
     }
 }

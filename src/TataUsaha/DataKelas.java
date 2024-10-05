@@ -64,6 +64,7 @@ public class DataKelas extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         user = new java.awt.Label();
         searchDataKelas = new javax.swing.JTextField();
+        refreshButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +117,13 @@ public class DataKelas extends javax.swing.JFrame {
             }
         });
 
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,7 +136,9 @@ public class DataKelas extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(searchDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -140,9 +150,11 @@ public class DataKelas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refreshButton)))
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -193,6 +205,10 @@ public class DataKelas extends javax.swing.JFrame {
         controller.searchDataKelas(searchText, DataKelasTable);
     }//GEN-LAST:event_searchDataKelasKeyReleased
 
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        controller.loadDataKelas(DataKelasTable);
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,6 +252,7 @@ public class DataKelas extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JTextField searchDataKelas;
     private java.awt.Label user;
     // End of variables declaration//GEN-END:variables
