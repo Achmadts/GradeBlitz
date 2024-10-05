@@ -52,8 +52,6 @@ public class HomeTataUsaha extends javax.swing.JFrame {
                 String ruang = tableModel.getValueAt(row, 5).toString();
                 String hari = tableModel.getValueAt(row, 6).toString();
 
-                System.out.println("NIP: " + nip);
-
                 UpdateDataJadwal updateForm = new UpdateDataJadwal(jadwalId, nip, mapel, hari, jam, ruang);
                 updateForm.setVisible(true);
             }
