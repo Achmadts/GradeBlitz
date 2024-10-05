@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package loginandsignup;
 
 import TataUsaha.HomeTataUsaha;
 import koneksi.koneksi;
 import Guru.HomeGuru;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,9 +13,6 @@ import javax.swing.JFrame;
 
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
     }
@@ -83,6 +78,11 @@ public class Login extends javax.swing.JFrame {
                 LoginBtnActionPerformed(evt);
             }
         });
+        LoginBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LoginBtnKeyPressed(evt);
+            }
+        });
         getContentPane().add(LoginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 474, 310, 22));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Login Pagelogin page.png"))); // NOI18N
@@ -102,6 +102,12 @@ public class Login extends javax.swing.JFrame {
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFocusLost
+
+    private void LoginBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LoginBtnKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            LoginMethod();
+        }
+    }//GEN-LAST:event_LoginBtnKeyPressed
 
     public void LoginMethod() {
         String Email, Password, query, fname = null, passDb = null;
