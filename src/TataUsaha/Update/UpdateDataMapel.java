@@ -1,35 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TataUsaha.Update;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import controllers.UpdateDataMapelController;
+import models.UpdateDataMapelModel;
 import javax.swing.JOptionPane;
-import koneksi.koneksi;
 
-/**
- *
- * @author Achmad
- */
 public class UpdateDataMapel extends javax.swing.JFrame {
 
     private String namaMapel, idMapel;
     private int userId;
+    private UpdateDataMapelController controller;
 
-    /**
-     * Creates new form UpdateDataMapel
-     */
     public UpdateDataMapel(int userId, String idMapel, String namaMapel) {
+        initComponents();
         this.idMapel = idMapel;
         this.namaMapel = namaMapel;
         this.userId = userId;
-        initComponents();
-
+        UpdateDataMapelModel model = new UpdateDataMapelModel();
+        controller = new UpdateDataMapelController(model);
         mapelID.setText(idMapel);
         mpelName.setText(namaMapel);
+    }
+
+    private void updateDataMapel() {
+        String id = mapelID.getText();
+        String nama = mpelName.getText();
+
+        if (controller.updateMapel(id, nama)) {
+            JOptionPane.showMessageDialog(this, "Data mapel berhasil diperbarui. Harap refresh halaman data mapel", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -205,26 +205,6 @@ public class UpdateDataMapel extends javax.swing.JFrame {
     private void mapelIDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mapelIDFocusGained
 
     }//GEN-LAST:event_mapelIDFocusGained
-
-    private void updateDataMapel() {
-        String query = "UPDATE mapel SET nama_mapel = ? WHERE id = ?";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(2, mapelID.getText());
-            preparedStatement.setString(1, mpelName.getText());
-
-            System.out.println(idMapel);
-            int rowsUpdated = preparedStatement.executeUpdate();
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(this, "Data mapel berhasil diperbarui. Harap refresh halaman data mapel", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     /**
      * @param args the command line arguments
