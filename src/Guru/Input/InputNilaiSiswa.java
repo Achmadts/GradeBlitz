@@ -1,15 +1,10 @@
 package Guru.Input;
 
+import controllers.InputNilaiSiswaController;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 
-import koneksi.koneksi;
+import javax.swing.*;
+import java.sql.Timestamp;
 
 public class InputNilaiSiswa extends javax.swing.JFrame {
 
@@ -17,118 +12,35 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
     private String nama;
     private int userId;
     private String userName;
-    private String guruMapel;
+    private InputNilaiSiswaController controller;
 
     public InputNilaiSiswa(String nis, int userId, String userName) {
         this.nis = nis;
         this.userId = userId;
         this.userName = userName;
+        this.controller = new InputNilaiSiswaController();
         initComponents();
 
-        // Debugging
-//        System.out.println("Debug: userId di InputNilaiSiswa: " + userId);
         nisSiswa.setText(nis);
         namaGuru.setText(userName != null ? userName : "No Name Provided");
 
-        guruMapel = getGuruMapel(userId);
+        String guruMapel = controller.getGuruMapel(userId);
+        nama_mapel.setText(guruMapel != null ? guruMapel : "Tidak ada data");
+    }
 
-        if (guruMapel != null) {
-            nama_mapel.setText(guruMapel);
+    private void insertNilai() {
+        String namaMapel = nama_mapel.getText();
+        String nilaiSiswa = nilai.getText();
+
+        boolean isSaved = controller.saveNilaiSiswa(nisSiswa.getText(), namaMapel, userId, nilaiSiswa);
+
+        if (isSaved) {
+            JOptionPane.showMessageDialog(this, "Data berhasil disimpan.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            nisSiswa.setText("");
+            nama_mapel.setText("");
+            namaGuru.setText("");
+            nilai.setText("");
         } else {
-            nama_mapel.setText("Tidak ada data");
-        }
-    }
-
-    public int getGuruId(String userName) {
-        int guruId = -1;
-        String queryGuruId = "SELECT id FROM users WHERE userName = ?";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatementGuruId = conn.prepareStatement(queryGuruId)) {
-            preparedStatementGuruId.setString(1, userName);
-            ResultSet resultSetGuruId = preparedStatementGuruId.executeQuery();
-
-            if (resultSetGuruId.next()) {
-                guruId = resultSetGuruId.getInt("id");
-            } else {
-                System.out.println("ID guru tidak ditemukan untuk userName: " + userName);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal mengambil ID guru", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return guruId;
-    }
-
-    public String getGuruMapel(int userId) {
-        if (userId == 0) {
-            System.out.println("Error: userId tidak valid (0)");
-            return null;
-        }
-
-        String guruMapel = null;
-        String queryMapel = "SELECT guruMapel FROM users WHERE nip = ?";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatementMapel = conn.prepareStatement(queryMapel)) {
-            preparedStatementMapel.setInt(1, userId);
-            ResultSet resultSetMapel = preparedStatementMapel.executeQuery();
-
-            if (resultSetMapel.next()) {
-                guruMapel = resultSetMapel.getString("guruMapel");
-            } else {
-                System.out.println("Mapel tidak ditemukan untuk user_id: " + userId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal mengambil data guruMapel", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        return guruMapel;
-    }
-
-    private int getMapelId(String namaMapel) {
-        String query = "SELECT id FROM mapel WHERE nama_mapel = ?";
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, namaMapel);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    private void insertHasilPelaporan() {
-        String query = "INSERT INTO hasil_pelaporan (murid_id, mapel_id, user_id, nilai, tanggal) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            String namaMapel = nama_mapel.getText();
-            int mapelId = getMapelId(namaMapel);
-
-            if (mapelId == -1) {
-                JOptionPane.showMessageDialog(this, "Mata pelajaran tidak valid.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            preparedStatement.setString(1, nisSiswa.getText());
-            preparedStatement.setInt(2, mapelId);
-            preparedStatement.setInt(3, userId);
-            preparedStatement.setString(4, nilai.getText());
-            preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-
-            int rowsInserted = preparedStatement.executeUpdate();
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "Data berhasil disimpan.", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                nisSiswa.setText("");
-                nama_mapel.setText("");
-                namaGuru.setText("");
-                nilai.setText("");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Gagal menyimpan data.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -359,7 +271,7 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKirimDataJadwal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataJadwal2ActionPerformed
-        insertHasilPelaporan();
+        insertNilai();
     }//GEN-LAST:event_btnKirimDataJadwal2ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
