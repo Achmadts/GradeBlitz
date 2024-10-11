@@ -467,10 +467,10 @@ public class HomeTataUsaha extends javax.swing.JFrame {
     }//GEN-LAST:event_InputDataGuruMousePressed
 
     private void InputDataJadwalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputDataJadwalMousePressed
-        String fname = user.getText();
-        InputDataJadwal InputDataJadwalFrame = new InputDataJadwal(this, fname, userId);
+//        String fname = user.getText();
+        InputDataJadwal InputDataJadwalFrame = new InputDataJadwal();
         InputDataJadwalFrame.setVisible(true);
-        this.setVisible(false);
+//        this.setVisible(false);
     }//GEN-LAST:event_InputDataJadwalMousePressed
 
     private void InputDataJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InputDataJadwalKeyPressed

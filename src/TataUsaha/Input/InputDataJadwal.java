@@ -1,61 +1,20 @@
 package TataUsaha.Input;
 
 import TataUsaha.HomeTataUsaha;
-import koneksi.koneksi;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import controllers.InputDataJadwalController;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Achmad
- */
 public class InputDataJadwal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InputDataJadwal
-     */
+    private InputDataJadwalController controller;
     private HomeTataUsaha homeFrame;
 
-    public InputDataJadwal(HomeTataUsaha homeFrame, String userName, int userId) {
+    public InputDataJadwal() {
         initComponents();
-        this.homeFrame = homeFrame;
-        this.userName = userName;
-        this.userId = userId;
-        user.setText(userName);
+        controller = new InputDataJadwalController();
         loadComboBoxes();
         addHariComboBoxListener();
-    }
-
-    private int roleId;
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    //    BARU 1
-    private int userId;
-    private String userName;
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     private void loadComboBoxes() {
@@ -65,11 +24,46 @@ public class InputDataJadwal extends javax.swing.JFrame {
     }
 
     private void addHariComboBoxListener() {
-        hari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadJamComboBox();
-            }
-        });
+        hari.addActionListener(evt -> loadJamComboBox());
+    }
+
+    private void loadGuruComboBox() {
+        List<String> guruList = controller.loadGuruList();
+        namaGuru.removeAllItems();
+        for (String guru : guruList) {
+            namaGuru.addItem(guru);
+        }
+    }
+
+    private void loadMapelComboBox() {
+        List<String> mapelList = controller.loadMapelList();
+        namaMapel.removeAllItems();
+        for (String mapel : mapelList) {
+            namaMapel.addItem(mapel);
+        }
+    }
+
+    private void loadJamComboBox() {
+        String selectedHari = (String) hari.getSelectedItem();
+        List<String> jamList = controller.loadAvailableJam(selectedHari);
+        jam.removeAllItems();
+        for (String jamItem : jamList) {
+            jam.addItem(jamItem);
+        }
+    }
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {
+        String selectedGuru = (String) namaGuru.getSelectedItem();
+        String selectedMapel = (String) namaMapel.getSelectedItem();
+        String selectedHari = (String) hari.getSelectedItem();
+        String selectedJam = (String) jam.getSelectedItem();
+        String selectedRuang = (String) ruang.getSelectedItem();
+
+        if (controller.saveDataJadwal(selectedGuru, selectedMapel, selectedHari, selectedJam, selectedRuang)) {
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menambahkan data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -247,122 +241,31 @@ public class InputDataJadwal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadJamComboBox() {
-        String selectedHari = (String) hari.getSelectedItem();
-        String query = "SELECT jam FROM jadwal_pelajaran WHERE hari = ?";
-
-        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-            preparedStatement.setString(1, selectedHari);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            String[] allJam = {
-                "08:00 - 08:40", "08:40 - 09:20", "09:35 - 10:15", "10:15 - 10:55",
-                "10:55 - 11:35", "11:35 - 12:15", "13:00 - 13:45", "13:45 - 14:30",
-                "14:30 - 15:15", "15:15 - 16:00"
-            };
-            Set<String> availableJam = new HashSet<>(Arrays.asList(allJam));
-
-            while (resultSet.next()) {
-                String jamTerpakai = resultSet.getString("jam");
-                availableJam.remove(jamTerpakai);
-            }
-
-            List<String> sortedJam = new ArrayList<>(availableJam);
-            Collections.sort(sortedJam);
-
-            jam.removeAllItems();
-            for (String jamItem : sortedJam) {
-                jam.addItem(jamItem);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal memuat data jam", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void loadGuruComboBox() {
-        String query = "SELECT nip, full_name FROM users WHERE role_id = 2";
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery(query)) {
-
-            namaGuru.removeAllItems();
-            while (resultSet.next()) {
-                String guruId = resultSet.getString("nip");
-                String nama = resultSet.getString("full_name");
-                namaGuru.addItem(guruId + " - " + nama);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal memuat data guru", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void loadMapelComboBox() {
-        String query = "SELECT id, nama_mapel FROM mapel";
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery(query)) {
-
-            namaMapel.removeAllItems();
-            while (resultSet.next()) {
-                String mapelId = resultSet.getString("id");
-                String nama_napel = resultSet.getString("nama_mapel");
-                namaMapel.addItem(mapelId + " - " + nama_napel);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal memuat data Mata Pelajaran", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void insertDataJadwal() {
+    private void btnKirimDataJadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataJadwalActionPerformed
         String selectedGuru = (String) namaGuru.getSelectedItem();
-        String guruId = selectedGuru.split(" - ")[0];
-
         String selectedMapel = (String) namaMapel.getSelectedItem();
-        String mapelId = selectedMapel.split(" - ")[0];
-
         String selectedHari = (String) hari.getSelectedItem();
         String selectedJam = (String) jam.getSelectedItem();
         String selectedRuang = (String) ruang.getSelectedItem();
 
-        String query = "INSERT INTO jadwal_pelajaran (user_id, mapel_id, hari, jam, ruang) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setInt(1, Integer.parseInt(guruId));
-            preparedStatement.setInt(2, Integer.parseInt(mapelId));
-            preparedStatement.setString(3, selectedHari);
-            preparedStatement.setString(4, selectedJam);
-            preparedStatement.setString(5, selectedRuang);
-
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Success", JOptionPane.INFORMATION_MESSAGE);
-                namaGuru.setSelectedIndex(-1);
-                namaMapel.setSelectedIndex(-1);
-                hari.setSelectedIndex(-1);
-                jam.setSelectedIndex(-1);
-                ruang.setSelectedIndex(-1);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-//            JOptionPane.showMessageDialog(this, "Gagal menambahkan data", "Error", JOptionPane.ERROR_MESSAGE);
+        if (selectedGuru == null || selectedMapel == null || selectedHari == null || selectedJam == null || selectedRuang == null) {
+            JOptionPane.showMessageDialog(this, "Pastikan semua data telah diisi!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }
 
-    private void btnKirimDataJadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataJadwalActionPerformed
-        insertDataJadwal();
+        if (controller.saveDataJadwal(selectedGuru, selectedMapel, selectedHari, selectedJam, selectedRuang)) {
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Success", JOptionPane.INFORMATION_MESSAGE);
+            namaGuru.setSelectedIndex(-1);
+            namaMapel.setSelectedIndex(-1);
+            hari.setSelectedIndex(-1);
+            jam.setSelectedIndex(-1);
+            ruang.setSelectedIndex(-1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menambahkan data", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnKirimDataJadwalActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        String hariDiPilih = homeFrame.getComboBoxHari().getSelectedItem().toString();
-        homeFrame.setVisible(true);
-        homeFrame.loadJadwalData(hariDiPilih);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
