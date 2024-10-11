@@ -1,58 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TataUsaha.Input;
 
+import TataUsaha.HomeTataUsaha;
+import controllers.InputDataGuruController;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import models.InputDataGuruModel;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-import TataUsaha.HomeTataUsaha;
-import TataUsaha.HomeTataUsaha;
-import koneksi.koneksi;
 
-/**
- *
- * @author Achmad
- */
 public class InputDataGuru extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InputDataGuru
-     */
     private HomeTataUsaha homeFrame;
+    private InputDataGuruController controller;
+    private int userId;
+    private String userName;
 
     public InputDataGuru(HomeTataUsaha homeFrame, String userName, int userId) {
         initComponents();
         this.homeFrame = homeFrame;
         this.userName = userName;
         this.userId = userId;
+        controller = new InputDataGuruController();
         user.setText(userName);
-    }
-
-    private int roleId;
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    //    BARU 1
-    private int userId;
-    private String userName;
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     /**
@@ -273,52 +240,6 @@ public class InputDataGuru extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void insertDataGuru() {
-        String nip = nipGuru.getText();
-        String nama = namaGuru.getText();
-        String email = emailGuru.getText();
-        String password = passwordGuru.getText();
-        String selectedMapel = (String) mapelGuru.getSelectedItem();
-
-        String checkQuery = "SELECT COUNT(*) FROM users WHERE full_name = ? OR email = ?";
-
-        try (Connection conn = (Connection) koneksi.koneksiDB(); PreparedStatement checkStatement = conn.prepareStatement(checkQuery)) {
-            checkStatement.setString(1, nama);
-            checkStatement.setString(2, email);
-
-            ResultSet rs = checkStatement.executeQuery();
-            rs.next();
-            int count = rs.getInt(1);
-
-            if (count > 0) {
-                JOptionPane.showMessageDialog(this, "Nama atau email sudah ada", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                String query = "INSERT INTO users (nip, full_name, email, password, guruMapel, role_id) VALUES (?, ?, ?, ?, ?, 2)";
-                try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                    preparedStatement.setString(1, nip);
-                    preparedStatement.setString(2, nama);
-                    preparedStatement.setString(3, email);
-                    preparedStatement.setString(4, password);
-                    preparedStatement.setString(5, selectedMapel);
-
-                    int rowsInserted = preparedStatement.executeUpdate();
-
-                    if (rowsInserted > 0) {
-                        JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        nipGuru.setText("");
-                        namaGuru.setText("");
-                        emailGuru.setText("");
-                        passwordGuru.setText("");
-                        mapelGuru.setSelectedIndex(-1);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Gagal menambahkan data", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     private void nipGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nipGuruFocusGained
         if (nipGuru.getText().equals("Masukkan NIP Guru")) {
             nipGuru.setText("");
@@ -366,7 +287,23 @@ public class InputDataGuru extends javax.swing.JFrame {
     }//GEN-LAST:event_namaGuruActionPerformed
 
     private void btnKirimDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataGuruActionPerformed
-        insertDataGuru();
+        String nip = nipGuru.getText();
+        String nama = namaGuru.getText();
+        String email = emailGuru.getText();
+        String password = passwordGuru.getText();
+        String selectedMapel = (String) mapelGuru.getSelectedItem();
+
+        InputDataGuruModel guru = new InputDataGuruModel(nip, nama, email, password, selectedMapel);
+
+        boolean success = controller.insertDataGuru(guru);
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan", "Success", JOptionPane.INFORMATION_MESSAGE);
+            nipGuru.setText("");
+            namaGuru.setText("");
+            emailGuru.setText("");
+            passwordGuru.setText("");
+            mapelGuru.setSelectedIndex(-1);
+        }
     }//GEN-LAST:event_btnKirimDataGuruActionPerformed
 
     private void passwordGuruFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordGuruFocusGained
