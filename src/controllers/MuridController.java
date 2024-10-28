@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import TataUsaha.Update.UpdateDataSiswa;
@@ -18,10 +14,6 @@ import pelaporan.cell.TableActionCellEditor;
 import pelaporan.cell.TableActionCellRender;
 import pelaporan.cell.TableActionEvent;
 
-/**
- *
- * @author Achmad
- */
 public class MuridController {
 
     private final MuridModel model;
@@ -47,7 +39,7 @@ public class MuridController {
 
                 String nis = tableModel.getValueAt(row, 0).toString();
                 UpdateDataSiswa UpdateDataSiswaForm = new UpdateDataSiswa(nis, userId, userName);
-                UpdateDataSiswaForm.setVisible(true);
+                UpdateDataSiswaForm.setVisible(true);                
             }
 
             @Override

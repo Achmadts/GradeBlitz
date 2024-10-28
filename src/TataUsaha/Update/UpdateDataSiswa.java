@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TataUsaha.Update;
 
-/**
- *
- * @author Achmad
- */
+import java.sql.Connection;
+import java.util.HashMap;
+import koneksi.koneksi;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 public class UpdateDataSiswa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateDataSiswa
-     */
+    private String nis;
+
     public UpdateDataSiswa(String nis, int userId, String userName) {
         initComponents();
+        this.nis = nis;
+        System.err.println("Nis siswa: " + nis);
     }
 
     /**
@@ -26,21 +26,51 @@ public class UpdateDataSiswa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CetakLaporan = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        CetakLaporan.setText("Cetak Laporan");
+        CetakLaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CetakLaporanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(CetakLaporan)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(CetakLaporan)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CetakLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CetakLaporanActionPerformed
+        try (Connection conn = koneksi.koneksiDB()) {
+            String reportPath = "src/Report/PelaporanHasilBelajarSiswa.jasper";
+            HashMap<String, Object> parameters = new HashMap<>();
+
+            parameters.put("nis", nis);
+
+            JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
+            JasperViewer viewer = new JasperViewer(print, false);
+            viewer.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_CetakLaporanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +108,6 @@ public class UpdateDataSiswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CetakLaporan;
     // End of variables declaration//GEN-END:variables
 }

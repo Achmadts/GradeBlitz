@@ -24,15 +24,7 @@ import pelaporan.cell.TableActionCellEditor;
 import pelaporan.cell.TableActionCellRender;
 import pelaporan.cell.TableActionEvent;
 
-/**
- *
- * @author Achmad
- */
 public class DataMurid extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DataSiswa
-     */
     private final MuridController controller;
     private HomeTataUsaha homeFrame;
 

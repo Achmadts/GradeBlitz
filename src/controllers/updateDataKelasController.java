@@ -12,7 +12,6 @@ import java.util.List;
 
 public class updateDataKelasController {
 
-    // Method to get the 'id' from 'tahun_ajaran' table using 'gen'
     public int getIdFromGen(int gen) {
         String query = "SELECT id FROM tahun_ajaran WHERE gen = ?";
         int id = -1;
@@ -28,10 +27,9 @@ public class updateDataKelasController {
             e.printStackTrace();
         }
 
-        return id; // Return the 'id' from 'tahun_ajaran'
+        return id;
     }
 
-    // Method to update class data
     public void updateDataKelas(updateDataKelasModel kelas) {
         String query = "UPDATE kelas SET nama_kelas = ?, jurusan = ?, gen_id = (SELECT id FROM tahun_ajaran WHERE tahun_ajaran = ?) WHERE id = ?";
 
@@ -39,9 +37,8 @@ public class updateDataKelasController {
 
             String namaKelas = kelas.getNamaKelas();
             String jurusan = kelas.getJurusan();
-            String tahunAjaran = "2022-2023";  // Misal, tahun ajaran yang diambil
+            String tahunAjaran = "2022-2023";
 
-            // Validasi input yang sesuai dengan tipe data
             if (tahunAjaran == null || tahunAjaran.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Tahun Ajaran tidak boleh kosong.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -49,7 +46,7 @@ public class updateDataKelasController {
 
             preparedStatement.setString(1, namaKelas);
             preparedStatement.setString(2, jurusan);
-            preparedStatement.setString(3, tahunAjaran); // Sesuaikan dengan tipe VARCHAR
+            preparedStatement.setString(3, tahunAjaran);
             preparedStatement.setInt(4, kelas.getKelasId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
@@ -64,7 +61,6 @@ public class updateDataKelasController {
         }
     }
 
-    // Method to fetch the list of class names
     public List<String> getKelasList() {
         List<String> kelasList = new ArrayList<>();
         String query = "SELECT nama_kelas FROM kelas";
@@ -79,7 +75,6 @@ public class updateDataKelasController {
         return kelasList;
     }
 
-    // Method to fetch the list of majors
     public List<String> getJurusanList() {
         List<String> jurusanList = new ArrayList<>();
         String query = "SELECT jurusan FROM kelas";
@@ -94,7 +89,6 @@ public class updateDataKelasController {
         return jurusanList;
     }
 
-    // Method to fill a JComboBox with class names and gen_ids
     public void isiComboBoxKelas(javax.swing.JComboBox<String> comboBox) {
         String query = "SELECT nama_kelas, gen_id FROM kelas";
 
