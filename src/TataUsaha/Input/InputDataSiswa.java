@@ -93,34 +93,29 @@ public class InputDataSiswa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA SISWA");
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INPUT DATA SISWA");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel2.setText("NIS");
 
-        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("NAMA");
 
-        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel4.setText("KELAS");
 
-        jLabel6.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel6.setText("NO WA");
 
-        jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel7.setText("ALAMAT");
 
-        nisSiswa.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        nisSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         nisSiswa.setForeground(new java.awt.Color(153, 153, 153));
         nisSiswa.setText("Masukkan NIS Siswa");
         nisSiswa.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -132,7 +127,7 @@ public class InputDataSiswa extends javax.swing.JFrame {
             }
         });
 
-        noWaSiswa.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        noWaSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         noWaSiswa.setForeground(new java.awt.Color(153, 153, 153));
         noWaSiswa.setText("Masukkan no wa siswa");
         noWaSiswa.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -149,7 +144,7 @@ public class InputDataSiswa extends javax.swing.JFrame {
             }
         });
 
-        namaSIswa.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        namaSIswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         namaSIswa.setForeground(new java.awt.Color(153, 153, 153));
         namaSIswa.setText("Masukkan Nama Siswa");
         namaSIswa.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -170,7 +165,7 @@ public class InputDataSiswa extends javax.swing.JFrame {
         });
 
         alamatSiswa.setColumns(20);
-        alamatSiswa.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        alamatSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         alamatSiswa.setForeground(new java.awt.Color(153, 153, 153));
         alamatSiswa.setRows(5);
         alamatSiswa.setText("Masukkan Alamat Siswa");
@@ -184,7 +179,8 @@ public class InputDataSiswa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(alamatSiswa);
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +189,8 @@ public class InputDataSiswa extends javax.swing.JFrame {
             }
         });
 
-        btnKirimDataSiswa.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataSiswa.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataSiswa.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataSiswa.setText("SUBMIT");
         btnKirimDataSiswa.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +199,7 @@ public class InputDataSiswa extends javax.swing.JFrame {
             }
         });
 
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         user.setText("name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -230,7 +228,7 @@ public class InputDataSiswa extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(kelasSiswa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(namaSIswa, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                                    .addComponent(namaSIswa, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                                     .addComponent(nisSiswa, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(noWaSiswa, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(80, 80, 80)))))
@@ -259,14 +257,11 @@ public class InputDataSiswa extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kelasSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
+                .addGap(58, 58, 58)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(65, 65, 65)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(noWaSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))

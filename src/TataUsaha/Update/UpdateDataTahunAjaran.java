@@ -56,13 +56,13 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("UPDATE DATA TAHUN AJARAN");
 
         jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("ID TA");
 
         tahunAjaranID.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
@@ -82,7 +82,6 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("TAHUN AJARAN");
 
         tahunAjaran.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
@@ -101,7 +100,7 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
             }
         });
 
-        btnKirimDataGuru.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataGuru.setBackground(new java.awt.Color(0, 102, 102));
         btnKirimDataGuru.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataGuru.setText("SUBMIT");
         btnKirimDataGuru.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +109,7 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +135,6 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("GEN");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

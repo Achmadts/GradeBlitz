@@ -72,18 +72,18 @@ public class InputDataMapel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA MATA PELAJARAN");
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INPUT DATA MAPEL");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel2.setText("NAMA MAPEL");
 
-        btnKirimDataMapel.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataMapel.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataMapel.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataMapel.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataMapel.setText("SUBMIT");
         btnKirimDataMapel.addActionListener(new java.awt.event.ActionListener() {
@@ -92,9 +92,11 @@ public class InputDataMapel extends javax.swing.JFrame {
             }
         });
 
+        namaMapel.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         namaMapel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBT", "PPB", "PWB", "BSD" }));
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +105,7 @@ public class InputDataMapel extends javax.swing.JFrame {
             }
         });
 
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         user.setText("name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -126,7 +129,7 @@ public class InputDataMapel extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(42, 42, 42)
-                                .addComponent(namaMapel, 0, 509, Short.MAX_VALUE)))))
+                                .addComponent(namaMapel, 0, 529, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

@@ -39,8 +39,6 @@ public class SignUp extends javax.swing.JFrame {
         Right.setBackground(new java.awt.Color(51, 51, 51));
         Right.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("F:\\KELAS_12_ATS\\PBT\\LoginAndSignUp\\src\\icon\\academy_scam-removebg-preview.png")); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Segoe Script", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Gradeblitz");
@@ -83,7 +81,7 @@ public class SignUp extends javax.swing.JFrame {
         Left.setMinimumSize(new java.awt.Dimension(400, 500));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Daftar");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
@@ -119,8 +117,7 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel4.setText("Sudah punya akun?");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(204, 51, 255));
+        jButton2.setForeground(new java.awt.Color(0, 102, 102));
         jButton2.setText("LogIn");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

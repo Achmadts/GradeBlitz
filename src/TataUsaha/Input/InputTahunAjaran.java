@@ -75,22 +75,21 @@ public class InputTahunAjaran extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA TAHUN AJARAN");
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INPUT DATA TAHUN AJARAN");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel2.setText("GEN");
 
-        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("TAHUN AJARAN");
 
-        btnKirimDataTahunAjaran.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataTahunAjaran.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataTahunAjaran.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataTahunAjaran.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataTahunAjaran.setText("SUBMIT");
         btnKirimDataTahunAjaran.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +98,8 @@ public class InputTahunAjaran extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class InputTahunAjaran extends javax.swing.JFrame {
             }
         });
 
-        txtGen.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        txtGen.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         txtGen.setForeground(new java.awt.Color(153, 153, 153));
         txtGen.setText("GEN");
         txtGen.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -120,7 +120,7 @@ public class InputTahunAjaran extends javax.swing.JFrame {
             }
         });
 
-        tahunAjaran.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        tahunAjaran.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         tahunAjaran.setForeground(new java.awt.Color(153, 153, 153));
         tahunAjaran.setText("TAHUN AJARAN");
         tahunAjaran.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -132,6 +132,7 @@ public class InputTahunAjaran extends javax.swing.JFrame {
             }
         });
 
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         user.setText("name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -142,7 +143,7 @@ public class InputTahunAjaran extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(user))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -150,13 +151,13 @@ public class InputTahunAjaran extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addGap(48, 48, 48)
-                        .addComponent(tahunAjaran))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(146, 146, 146)
-                        .addComponent(txtGen)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGen)
+                            .addComponent(tahunAjaran))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,7 +167,7 @@ public class InputTahunAjaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(user))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtGen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

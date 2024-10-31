@@ -98,34 +98,30 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("UPDATE DATA JADWAL");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel2.setText("GURU");
 
-        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("MATA PELAJARAN");
 
-        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel4.setText("HARI");
 
-        jLabel5.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel5.setText("JAM");
 
         jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("RUANG");
 
-        btnKirimDataJadwal.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataJadwal.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataJadwal.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataJadwal.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataJadwal.setText("SUBMIT");
         btnKirimDataJadwal.addActionListener(new java.awt.event.ActionListener() {
@@ -134,13 +130,16 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
             }
         });
 
+        hariComboBox.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
         hariComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT" }));
 
+        jamComboBox.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
         jamComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00 - 08:40", "08:40 - 09:20", "09:35 - 10:15", "10:15 - 10:55", "10:55 - 11:35", "11:35 - 12:15", "13:00 - 13:45", "13:45 - 14:30", "14:30 - 15:15", "15:15 - 16:00" }));
 
         ruangComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LAB 1", "LAB 2", "LAB 3", "LAB 4", "LAB 5", "R 44", "AWS" }));
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -184,8 +183,8 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(namaGuru, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(namaMapel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hariComboBox, 0, 298, Short.MAX_VALUE)
-                            .addComponent(jamComboBox, 0, 298, Short.MAX_VALUE)
+                            .addComponent(hariComboBox, 0, 400, Short.MAX_VALUE)
+                            .addComponent(jamComboBox, 0, 400, Short.MAX_VALUE)
                             .addComponent(ruangComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(36, 36, 36))))
         );
@@ -218,7 +217,7 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKirimDataJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

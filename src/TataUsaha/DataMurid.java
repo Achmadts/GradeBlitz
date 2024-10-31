@@ -83,6 +83,10 @@ public class DataMurid extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        DataMuridTable.setAutoCreateRowSorter(true);
+        DataMuridTable.setBackground(new java.awt.Color(0, 255, 153));
         DataMuridTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -103,7 +107,8 @@ public class DataMurid extends javax.swing.JFrame {
         DataMuridTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
         jScrollPane1.setViewportView(DataMuridTable);
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -113,10 +118,11 @@ public class DataMurid extends javax.swing.JFrame {
         });
 
         user.setAlignment(java.awt.Label.RIGHT);
-        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 13)); // NOI18N
+        user.setForeground(new java.awt.Color(0, 0, 0));
         user.setText("Name");
 
+        searchDataSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         searchDataSiswa.setText("Cari Nama atau NIS siswa");
         searchDataSiswa.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -158,7 +164,7 @@ public class DataMurid extends javax.swing.JFrame {
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchDataSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

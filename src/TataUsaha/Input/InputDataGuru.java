@@ -56,16 +56,16 @@ public class InputDataGuru extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA GURU");
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("INPUT DATA GURU");
 
-        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("NIP");
 
-        nipGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        nipGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         nipGuru.setForeground(new java.awt.Color(153, 153, 153));
         nipGuru.setText("Masukkan NIP Guru");
         nipGuru.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -77,11 +77,10 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel4.setText("NAMA");
 
-        namaGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        namaGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         namaGuru.setForeground(new java.awt.Color(153, 153, 153));
         namaGuru.setText("Masukkan Nama Guru");
         namaGuru.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -98,11 +97,10 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel5.setText("EMAIL");
 
-        emailGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        emailGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         emailGuru.setForeground(new java.awt.Color(153, 153, 153));
         emailGuru.setText("Masukkan Email Guru");
         emailGuru.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -114,8 +112,7 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel6.setText("PASSWORD");
 
         passwordGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
@@ -129,15 +126,15 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel7.setText("GURU MAPEL");
 
-        mapelGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        mapelGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         mapelGuru.setForeground(new java.awt.Color(153, 153, 153));
         mapelGuru.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBT", "PPB", "PWB", "BSD" }));
 
-        btnKirimDataGuru.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataGuru.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataGuru.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataGuru.setText("SUBMIT");
         btnKirimDataGuru.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +143,8 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +153,7 @@ public class InputDataGuru extends javax.swing.JFrame {
             }
         });
 
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         user.setText("name");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -181,7 +180,7 @@ public class InputDataGuru extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nipGuru, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(namaGuru, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(emailGuru, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                            .addComponent(emailGuru, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                             .addComponent(passwordGuru, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(mapelGuru, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()

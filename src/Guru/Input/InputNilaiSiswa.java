@@ -70,6 +70,7 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(0, 204, 153));
         jPanel3.setName(""); // NOI18N
         jPanel3.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -77,24 +78,20 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(204, 51, 255));
+        jLabel13.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("INPUT NILAI SISWA");
 
-        jLabel14.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel14.setText("NIS & NAMA SISWA");
 
-        jLabel15.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel15.setText("MATA PELAJARAN");
 
-        jLabel16.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel16.setText("NAMA GURU");
 
-        btnKirimDataJadwal2.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataJadwal2.setBackground(new java.awt.Color(0, 102, 102));
         btnKirimDataJadwal2.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataJadwal2.setText("SUBMIT");
         btnKirimDataJadwal2.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +100,7 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -112,11 +109,10 @@ public class InputNilaiSiswa extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel19.setText("NILAI");
 
-        nilai.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
+        nilai.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         nilai.setForeground(new java.awt.Color(153, 153, 153));
         nilai.setText("Contoh: 100, 90, 80");
         nilai.addFocusListener(new java.awt.event.FocusAdapter() {

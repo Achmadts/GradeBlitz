@@ -52,13 +52,13 @@ public class UpdateDataMapel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("UPDATE DATA GURU");
 
-        jLabel3.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel3.setText("ID MAPEL");
 
         mapelID.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
@@ -77,8 +77,7 @@ public class UpdateDataMapel extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe Script", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
         jLabel4.setText("MAPEL");
 
         mpelName.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
@@ -97,7 +96,8 @@ public class UpdateDataMapel extends javax.swing.JFrame {
             }
         });
 
-        btnKirimDataGuru.setBackground(new java.awt.Color(204, 51, 255));
+        btnKirimDataGuru.setBackground(new java.awt.Color(0, 102, 102));
+        btnKirimDataGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnKirimDataGuru.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataGuru.setText("SUBMIT");
         btnKirimDataGuru.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,8 @@ public class UpdateDataMapel extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +138,7 @@ public class UpdateDataMapel extends javax.swing.JFrame {
                                 .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBack)
-                                .addGap(0, 251, Short.MAX_VALUE)))))
+                                .addGap(0, 268, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

@@ -173,7 +173,10 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tata Usaha");
 
-        LogOutBtn.setBackground(new java.awt.Color(204, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        LogOutBtn.setBackground(new java.awt.Color(0, 102, 102));
+        LogOutBtn.setFont(new java.awt.Font("Segoe UI Historic", 1, 13)); // NOI18N
         LogOutBtn.setForeground(new java.awt.Color(255, 255, 255));
         LogOutBtn.setText("LOGOUT");
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +185,7 @@ public class HomeTataUsaha extends javax.swing.JFrame {
             }
         });
 
+        jadwalTableTataUsaha.setBackground(new java.awt.Color(0, 255, 153));
         jadwalTableTataUsaha.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -202,8 +206,8 @@ public class HomeTataUsaha extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jadwalTableTataUsaha);
 
         user.setAlignment(java.awt.Label.RIGHT);
-        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 13)); // NOI18N
+        user.setForeground(new java.awt.Color(0, 0, 0));
         user.setText("Name");
 
         comboBoxHari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT" }));
@@ -224,7 +228,7 @@ public class HomeTataUsaha extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(LogOutBtn)
-                                .addGap(0, 793, Short.MAX_VALUE))
+                                .addGap(0, 787, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -241,7 +245,7 @@ public class HomeTataUsaha extends javax.swing.JFrame {
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxHari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(LogOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

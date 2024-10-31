@@ -68,7 +68,10 @@ public class DataGuru extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backBtn.setBackground(new java.awt.Color(204, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        backBtn.setBackground(new java.awt.Color(0, 102, 102));
+        backBtn.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
         backBtn.setForeground(new java.awt.Color(255, 255, 255));
         backBtn.setText("BACK");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +80,7 @@ public class DataGuru extends javax.swing.JFrame {
             }
         });
 
+        DataGuruTable.setBackground(new java.awt.Color(0, 255, 153));
         DataGuruTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -97,11 +101,11 @@ public class DataGuru extends javax.swing.JFrame {
         jScrollPane1.setViewportView(DataGuruTable);
 
         user.setAlignment(java.awt.Label.RIGHT);
-        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 13)); // NOI18N
+        user.setForeground(new java.awt.Color(0, 0, 0));
         user.setText("Name");
 
-        searchDataGuru.setForeground(new java.awt.Color(153, 153, 153));
+        searchDataGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         searchDataGuru.setText("Search: nama atau nip");
         searchDataGuru.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -117,7 +121,7 @@ public class DataGuru extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +161,7 @@ public class DataGuru extends javax.swing.JFrame {
                         .addComponent(searchDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

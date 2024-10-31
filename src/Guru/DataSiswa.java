@@ -86,6 +86,11 @@ public class DataSiswa extends javax.swing.JFrame {
         setTitle("Data Siswa");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        DataSiswaTable.setAutoCreateRowSorter(true);
+        DataSiswaTable.setBackground(new java.awt.Color(0, 255, 153));
+        DataSiswaTable.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 12)); // NOI18N
         DataSiswaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -106,7 +111,8 @@ public class DataSiswa extends javax.swing.JFrame {
         DataSiswaTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
         jScrollPane1.setViewportView(DataSiswaTable);
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -116,10 +122,11 @@ public class DataSiswa extends javax.swing.JFrame {
         });
 
         user.setAlignment(java.awt.Label.RIGHT);
-        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        user.setForeground(new java.awt.Color(0, 0, 0));
         user.setText("Name");
 
+        searchDataSiswa.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         searchDataSiswa.setText("Cari Nama atau NIS siswa");
         searchDataSiswa.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -160,10 +167,12 @@ public class DataSiswa extends javax.swing.JFrame {
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchDataSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(0, 255, 153));
 
         jMenu1.setText("Data");
         jMenuBar1.add(jMenu1);

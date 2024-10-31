@@ -68,6 +68,10 @@ public class DataMapel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
+        DataMapelTable.setBackground(new java.awt.Color(0, 255, 153));
+        DataMapelTable.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         DataMapelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -88,7 +92,8 @@ public class DataMapel extends javax.swing.JFrame {
         DataMapelTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
         jScrollPane1.setViewportView(DataMapelTable);
 
-        btnBack.setBackground(new java.awt.Color(204, 51, 255));
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +103,11 @@ public class DataMapel extends javax.swing.JFrame {
         });
 
         user.setAlignment(java.awt.Label.RIGHT);
-        user.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        user.setForeground(new java.awt.Color(204, 51, 255));
+        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 13)); // NOI18N
+        user.setForeground(new java.awt.Color(0, 0, 0));
         user.setText("Name");
 
+        searchDataMapel.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         searchDataMapel.setText("Cari Nama mata pelajaran");
         searchDataMapel.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -117,7 +123,7 @@ public class DataMapel extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +163,7 @@ public class DataMapel extends javax.swing.JFrame {
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
