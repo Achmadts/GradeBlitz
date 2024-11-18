@@ -14,7 +14,6 @@ public class UpdateDataSiswa extends javax.swing.JFrame {
     public UpdateDataSiswa(String nis, int userId, String userName) {
         initComponents();
         this.nis = nis;
-        System.err.println("Nis siswa: " + nis);
     }
 
     /**
