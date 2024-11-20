@@ -52,12 +52,15 @@ public class HomeTataUsaha extends javax.swing.JFrame {
                 int jadwalId = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                 String jam = tableModel.getValueAt(row, 1).toString();
                 String nip = tableModel.getValueAt(row, 2).toString();
-                String mapel = tableModel.getValueAt(row, 4).toString();
+//                String mapel = tableModel.getValueAt(row, 4).toString();
                 String ruang = tableModel.getValueAt(row, 5).toString();
                 String hari = tableModel.getValueAt(row, 6).toString();
-
-                UpdateDataJadwal updateForm = new UpdateDataJadwal(jadwalId, nip, mapel, hari, jam, ruang);
+                
+                String mapelId = tableModel.getValueAt(row, 4).toString();
+                UpdateDataJadwal updateForm = new UpdateDataJadwal(jadwalId, nip, mapelId, hari, jam, ruang);
+                System.out.println("Mapel ID: " + mapelId);
                 updateForm.setVisible(true);
+
             }
 
             @Override

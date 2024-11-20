@@ -48,9 +48,9 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
         }
     }
 
-    private void updateFormFields(String nip, String mapel, String hari, String jam, String ruang) {
+    private void updateFormFields(String nip, String mapelId, String hari, String jam, String ruang) {
         setComboBoxValue(namaGuru, nip);
-        setComboBoxValue(namaMapel, mapel);
+        setComboBoxValue(namaMapel, mapelId);
         setComboBoxValue(hariComboBox, hari);
         setComboBoxValue(jamComboBox, jam);
         setComboBoxValue(ruangComboBox, ruang);
@@ -60,16 +60,18 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
         DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
         ArrayList<String> values = (ArrayList<String>) comboBox.getClientProperty("values");
 
+        System.out.println("ComboBox Values: " + values);
+        System.out.println("Value to Set: " + value);
+
         if (values != null) {
             for (int i = 0; i < values.size(); i++) {
                 if (values.get(i).equals(value)) {
                     comboBox.setSelectedIndex(i);
-                    break;
+                    return;
                 }
             }
-        } else {
-            comboBox.setSelectedItem(value);
         }
+        comboBox.setSelectedItem(value);
     }
 
     /**

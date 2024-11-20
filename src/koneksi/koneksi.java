@@ -10,7 +10,7 @@ public class koneksi {
 
     public static Connection koneksiDB() throws SQLException {
         try {
-            String DB = "jdbc:mysql://localhost:3306/gradeblitz";
+            String DB = "jdbc:mysql://localhost:3306/pelaporan_hasil_belajar_siswa";
             String user = "root";
             String pass = "";
             KoneksiDatabse = DriverManager.getConnection(DB, user, pass);
