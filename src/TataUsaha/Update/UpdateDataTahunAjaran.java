@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package TataUsaha.Update;
 
 import java.sql.Connection;
@@ -10,15 +6,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import koneksi.koneksi;
 
-/**
- *
- * @author Achmad
- */
 public class UpdateDataTahunAjaran extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateDataTahunAjaran
-     */
     private int userId;
     private String tahun_ajaran, idTA, gen;
 
@@ -32,6 +21,28 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
         tahunAjaranID.setText(idTA);
         tahunAjaran.setText(tahun_ajaran);
         genText.setText(gen);
+    }
+
+    private void updateDataTA() {
+        String query = "UPDATE tahun_ajaran SET gen = ?, tahun_ajaran = ? WHERE id = ?";
+
+        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, Integer.parseInt(genText.getText()));
+            preparedStatement.setString(2, tahunAjaran.getText());
+            preparedStatement.setInt(3, Integer.parseInt(tahunAjaranID.getText()));
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Data tahun ajaran berhasil diperbarui.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal memperbarui data tahun ajaran. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memperbarui data tahun ajaran.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Format data tidak valid. Periksa input angka untuk kolom gen dan id.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -227,7 +238,7 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
     }//GEN-LAST:event_tahunAjaranActionPerformed
 
     private void btnKirimDataGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKirimDataGuruActionPerformed
-//        UpdateDataTahunAjaran();
+        updateDataTA();
     }//GEN-LAST:event_btnKirimDataGuruActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -245,26 +256,6 @@ public class UpdateDataTahunAjaran extends javax.swing.JFrame {
     private void genTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genTextActionPerformed
-
-//    private void updateDataTA() {
-//        String query = "UPDATE tahun_ajaran SET gen = ?, tahun_ajaran = ? WHERE id = ?";
-//
-//        try (Connection conn = koneksi.koneksiDB(); PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-//            preparedStatement.setString(2, mapelID.getText());
-//            preparedStatement.setString(1, mpelName.getText());
-//
-//            System.out.println(idMapel);
-//            int rowsUpdated = preparedStatement.executeUpdate();
-//            if (rowsUpdated > 0) {
-//                JOptionPane.showMessageDialog(this, "Data mapel berhasil diperbarui. Harap refresh halaman data mapel", "Success", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel. ID tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(this, "Gagal memperbarui data mapel.", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
 
     /**
      * @param args the command line arguments
