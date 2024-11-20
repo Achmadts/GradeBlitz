@@ -60,8 +60,8 @@ public class UpdateDataJadwal extends javax.swing.JFrame {
         DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) comboBox.getModel();
         ArrayList<String> values = (ArrayList<String>) comboBox.getClientProperty("values");
 
-        System.out.println("ComboBox Values: " + values);
-        System.out.println("Value to Set: " + value);
+//        System.out.println("ComboBox Values: " + values);
+//        System.out.println("Value to Set: " + value);
 
         if (values != null) {
             for (int i = 0; i < values.size(); i++) {

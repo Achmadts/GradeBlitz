@@ -1,14 +1,9 @@
 package TataUsaha;
 
-import TataUsaha.Input.InputDataGuru;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import TataUsaha.Input.InputDataJadwal;
-import TataUsaha.Input.InputDataKelas;
-import TataUsaha.Input.InputDataMapel;
-import TataUsaha.Input.InputDataSiswa;
-import TataUsaha.Input.InputTahunAjaran;
+import TataUsaha.Input.*;
 import TataUsaha.Update.UpdateDataJadwal;
 import javax.swing.JTable;
 import loginandsignup.Login;
