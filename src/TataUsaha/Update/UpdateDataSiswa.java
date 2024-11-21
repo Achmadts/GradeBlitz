@@ -61,7 +61,7 @@ public class UpdateDataSiswa extends javax.swing.JFrame {
 
     private void CetakLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CetakLaporanActionPerformed
         try (Connection conn = koneksi.koneksiDB()) {
-            String reportPath = "src/Report/PelaporanHasilBelajarSiswa.jasper";
+            String reportPath = "src/Report/Blank_Letter.jasper";
             HashMap<String, Object> parameters = new HashMap<>();
 
             parameters.put("nis", nis);
