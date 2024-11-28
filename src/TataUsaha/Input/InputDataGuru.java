@@ -32,21 +32,16 @@ public class InputDataGuru extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         nipGuru = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         namaGuru = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         emailGuru = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         passwordGuru = new javax.swing.JPasswordField();
-        jLabel7 = new javax.swing.JLabel();
         mapelGuru = new javax.swing.JComboBox<>();
         btnKirimDataGuru = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         user = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 51, 255));
@@ -55,19 +50,12 @@ public class InputDataGuru extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA GURU");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("INPUT DATA GURU");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel3.setText("NIP");
-
+        nipGuru.setBackground(new java.awt.Color(255, 255, 255));
         nipGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        nipGuru.setForeground(new java.awt.Color(153, 153, 153));
-        nipGuru.setText("Masukkan NIP Guru");
+        nipGuru.setForeground(new java.awt.Color(60, 63, 65));
+        nipGuru.setBorder(null);
         nipGuru.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 nipGuruFocusGained(evt);
@@ -76,13 +64,17 @@ public class InputDataGuru extends javax.swing.JFrame {
                 nipGuruFocusLost(evt);
             }
         });
+        nipGuru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nipGuruActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nipGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 135, 550, 22));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel4.setText("NAMA");
-
+        namaGuru.setBackground(new java.awt.Color(255, 255, 255));
         namaGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        namaGuru.setForeground(new java.awt.Color(153, 153, 153));
-        namaGuru.setText("Masukkan Nama Guru");
+        namaGuru.setForeground(new java.awt.Color(60, 63, 65));
+        namaGuru.setBorder(null);
         namaGuru.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 namaGuruFocusGained(evt);
@@ -96,13 +88,12 @@ public class InputDataGuru extends javax.swing.JFrame {
                 namaGuruActionPerformed(evt);
             }
         });
+        getContentPane().add(namaGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 198, 550, 22));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel5.setText("EMAIL");
-
+        emailGuru.setBackground(new java.awt.Color(255, 255, 255));
         emailGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        emailGuru.setForeground(new java.awt.Color(153, 153, 153));
-        emailGuru.setText("Masukkan Email Guru");
+        emailGuru.setForeground(new java.awt.Color(60, 63, 65));
+        emailGuru.setBorder(null);
         emailGuru.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 emailGuruFocusGained(evt);
@@ -111,12 +102,12 @@ public class InputDataGuru extends javax.swing.JFrame {
                 emailGuruFocusLost(evt);
             }
         });
+        getContentPane().add(emailGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 262, 550, 22));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel6.setText("PASSWORD");
-
+        passwordGuru.setBackground(new java.awt.Color(255, 255, 255));
         passwordGuru.setFont(new java.awt.Font("Segoe Script", 1, 12)); // NOI18N
-        passwordGuru.setForeground(new java.awt.Color(153, 153, 153));
+        passwordGuru.setForeground(new java.awt.Color(60, 63, 65));
+        passwordGuru.setBorder(null);
         passwordGuru.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordGuruFocusGained(evt);
@@ -125,13 +116,14 @@ public class InputDataGuru extends javax.swing.JFrame {
                 passwordGuruFocusLost(evt);
             }
         });
+        getContentPane().add(passwordGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 326, 550, 22));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel7.setText("GURU MAPEL");
-
+        mapelGuru.setBackground(new java.awt.Color(255, 255, 255));
         mapelGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        mapelGuru.setForeground(new java.awt.Color(153, 153, 153));
+        mapelGuru.setForeground(new java.awt.Color(60, 63, 65));
         mapelGuru.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PBT", "PPB", "PWB", "BSD" }));
+        mapelGuru.setBorder(null);
+        getContentPane().add(mapelGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 389, 550, 22));
 
         btnKirimDataGuru.setBackground(new java.awt.Color(0, 102, 102));
         btnKirimDataGuru.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
@@ -142,6 +134,7 @@ public class InputDataGuru extends javax.swing.JFrame {
                 btnKirimDataGuruActionPerformed(evt);
             }
         });
+        getContentPane().add(btnKirimDataGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 463, 100, 44));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
@@ -152,88 +145,19 @@ public class InputDataGuru extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(484, 463, 100, 44));
 
         user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        user.setForeground(new java.awt.Color(60, 63, 65));
         user.setText("name");
+        getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(user)
-                        .addGap(10, 10, 10))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel6))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nipGuru, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(namaGuru, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(emailGuru, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(passwordGuru, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(mapelGuru, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBack)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user))
-                .addGap(58, 58, 58)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nipGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(namaGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailGuru, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(passwordGuru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mapelGuru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKirimDataGuru, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
-        );
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataKelas.png"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataGuru.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -320,6 +244,10 @@ public class InputDataGuru extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void nipGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nipGuruActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nipGuruActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,12 +292,7 @@ public class InputDataGuru extends javax.swing.JFrame {
     private javax.swing.JTextField emailGuru;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JComboBox<String> mapelGuru;
     private javax.swing.JTextField namaGuru;
     private javax.swing.JTextField nipGuru;

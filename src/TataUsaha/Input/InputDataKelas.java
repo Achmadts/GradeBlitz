@@ -67,33 +67,36 @@ public class InputDataKelas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnKirimDataKelas = new javax.swing.JButton();
         namaKelas = new javax.swing.JComboBox<>();
         namaJurusan = new javax.swing.JComboBox<>();
-        btnBack = new javax.swing.JButton();
         genSiswa = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
+        btnKirimDataKelas = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         user = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA KELAS");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
-        jPanel1.setName(""); // NOI18N
+        namaKelas.setBackground(new java.awt.Color(255, 255, 255));
+        namaKelas.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        namaKelas.setForeground(new java.awt.Color(60, 63, 65));
+        namaKelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RPL 1", "RPL 2" }));
+        namaKelas.setBorder(null);
+        getContentPane().add(namaKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 195, 550, 22));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 19)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INPUT DATA KELAS");
+        namaJurusan.setBackground(new java.awt.Color(255, 255, 255));
+        namaJurusan.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        namaJurusan.setForeground(new java.awt.Color(60, 63, 65));
+        namaJurusan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rekayasa Perangkat Lunak" }));
+        namaJurusan.setBorder(null);
+        getContentPane().add(namaJurusan, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 550, 22));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel2.setText("KELAS");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel3.setText("JURUSAN");
+        genSiswa.setBackground(new java.awt.Color(255, 255, 255));
+        genSiswa.setForeground(new java.awt.Color(60, 63, 65));
+        genSiswa.setBorder(null);
+        getContentPane().add(genSiswa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 366, 550, 22));
 
         btnKirimDataKelas.setBackground(new java.awt.Color(0, 102, 102));
         btnKirimDataKelas.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
@@ -104,12 +107,7 @@ public class InputDataKelas extends javax.swing.JFrame {
                 btnKirimDataKelasActionPerformed(evt);
             }
         });
-
-        namaKelas.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        namaKelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RPL 1", "RPL 2" }));
-
-        namaJurusan.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        namaJurusan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rekayasa Perangkat Lunak" }));
+        getContentPane().add(btnKirimDataKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 459, 99, 42));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
@@ -120,86 +118,15 @@ public class InputDataKelas extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel4.setText("GEN");
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 458, 100, 44));
 
         user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        user.setForeground(new java.awt.Color(60, 63, 65));
         user.setText("name");
+        getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(user))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnKirimDataKelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel2)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(namaKelas, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(namaJurusan, javax.swing.GroupLayout.Alignment.TRAILING, 0, 549, Short.MAX_VALUE)
-                                    .addComponent(genSiswa, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(namaKelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(namaJurusan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(genSiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKirimDataKelas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataKelas.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -305,11 +232,7 @@ public class InputDataKelas extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnKirimDataKelas;
     private javax.swing.JComboBox<String> genSiswa;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> namaJurusan;
     private javax.swing.JComboBox<String> namaKelas;
     private javax.swing.JLabel user;
