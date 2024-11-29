@@ -40,7 +40,6 @@ public class InputDataGuru extends javax.swing.JFrame {
         btnKirimDataGuru = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         user = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
@@ -151,9 +150,6 @@ public class InputDataGuru extends javax.swing.JFrame {
         user.setForeground(new java.awt.Color(60, 63, 65));
         user.setText("name");
         getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataKelas.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataGuru.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -292,7 +288,6 @@ public class InputDataGuru extends javax.swing.JFrame {
     private javax.swing.JTextField emailGuru;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JComboBox<String> mapelGuru;
     private javax.swing.JTextField namaGuru;
     private javax.swing.JTextField nipGuru;

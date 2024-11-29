@@ -75,62 +75,68 @@ public class InputDataJadwal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        btnKirimDataJadwal = new javax.swing.JButton();
         namaGuru = new javax.swing.JComboBox<>();
         namaMapel = new javax.swing.JComboBox<>();
         hari = new javax.swing.JComboBox<>();
         jam = new javax.swing.JComboBox<>();
         ruang = new javax.swing.JComboBox<>();
+        btnKirimDataJadwal = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        user = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INPUT DATA JADWAL");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
-        jPanel1.setName(""); // NOI18N
+        namaGuru.setBackground(new java.awt.Color(255, 255, 255));
+        namaGuru.setBorder(null);
+        getContentPane().add(namaGuru, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 137, 550, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 20)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INPUT DATA JADWAL");
+        namaMapel.setBackground(new java.awt.Color(255, 255, 255));
+        namaMapel.setBorder(null);
+        namaMapel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaMapelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(namaMapel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 550, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel2.setText("GURU");
+        hari.setBackground(new java.awt.Color(255, 255, 255));
+        hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT" }));
+        hari.setBorder(null);
+        hari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hariActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hari, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 264, 550, 20));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel3.setText("MATA PELAJARAN");
+        jam.setBackground(new java.awt.Color(255, 255, 255));
+        jam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00 - 08:40", "08:40 - 09:20", "09:35 - 10:15", "10:15 - 10:55", "10:55 - 11:35", "11:35 - 12:15", "13:00 - 13:45", "13:45 - 14:30", "14:30 - 15:15", "15:15 - 16:00" }));
+        jam.setBorder(null);
+        getContentPane().add(jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 327, 550, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel4.setText("HARI");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel5.setText("JAM");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel7.setText("RUANG");
+        ruang.setBackground(new java.awt.Color(255, 255, 255));
+        ruang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LAB 1", "LAB 2", "LAB 3", "LAB 4", "LAB 5", "R 44", "AWS" }));
+        ruang.setBorder(null);
+        ruang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ruangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ruang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 550, -1));
 
         btnKirimDataJadwal.setBackground(new java.awt.Color(0, 102, 102));
         btnKirimDataJadwal.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
         btnKirimDataJadwal.setForeground(new java.awt.Color(255, 255, 255));
         btnKirimDataJadwal.setText("SUBMIT");
+        btnKirimDataJadwal.setBorder(null);
         btnKirimDataJadwal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKirimDataJadwalActionPerformed(evt);
             }
         });
-
-        hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT" }));
-
-        jam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00 - 08:40", "08:40 - 09:20", "09:35 - 10:15", "10:15 - 10:55", "10:55 - 11:35", "11:35 - 12:15", "13:00 - 13:45", "13:45 - 14:30", "14:30 - 15:15", "15:15 - 16:00" }));
-
-        ruang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LAB 1", "LAB 2", "LAB 3", "LAB 4", "LAB 5", "R 44", "AWS" }));
+        getContentPane().add(btnKirimDataJadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 458, 100, 44));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
@@ -141,99 +147,10 @@ public class InputDataJadwal extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 458, 100, 44));
 
-        user.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
-        user.setText("name");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnKirimDataJadwal, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(user))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(114, 114, 114))
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(109, 109, 109))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(119, 119, 119))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(96, 96, 96)))
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(namaGuru, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(namaMapel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(hari, 0, 497, Short.MAX_VALUE)
-                                    .addComponent(jam, 0, 497, Short.MAX_VALUE)
-                                    .addComponent(ruang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(36, 36, 36))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(namaGuru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(namaMapel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(ruang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnKirimDataJadwal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/InputDataJadwal.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -266,6 +183,18 @@ public class InputDataJadwal extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void namaMapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMapelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaMapelActionPerformed
+
+    private void hariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hariActionPerformed
+
+    private void ruangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ruangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,17 +238,10 @@ public class InputDataJadwal extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnKirimDataJadwal;
     private javax.swing.JComboBox<String> hari;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jam;
     private javax.swing.JComboBox<String> namaGuru;
     private javax.swing.JComboBox<String> namaMapel;
     private javax.swing.JComboBox<String> ruang;
-    private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }
